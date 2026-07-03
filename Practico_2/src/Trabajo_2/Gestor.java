@@ -134,39 +134,39 @@ public class Gestor {
 				opcion3 = sc.nextInt();
 				sc.nextLine();
 				if (opcion3 == 1) {
-					System.out.println("Para eliminar un electrónico, ingrese el código de producto del mismo: ");
-					String codigoProducto = sc.nextLine();
-					bajaLibro(arregloLibros, codigoProducto);
+					System.out.println("Para eliminar un libro, ingrese el isbn: ");
+					String isbn = sc.nextLine();
+					bajaLibro(arregloLibros, isbn);
 					break;
 				} else if (opcion3 == 2) {
-					System.out.println("Para eliminar un alimento, ingrese el código de producto del mismo: ");
-					String codigoProducto2 = sc.nextLine();
-					bajaRevista(arregloRevistas, codigoProducto2);
+					System.out.println("Para eliminar una revista, ingrese el issn: ");
+					String issn = sc.nextLine();
+					bajaRevista(arregloRevistas, issn);
 					break;
 				} else if (opcion3 == 3) {
-					System.out.println("Para eliminar una prenda, ingrese el código de producto del mismo: ");
-					String codigoProducto3 = sc.nextLine();
-					bajaArticulo(arregloArticulos, codigoProducto3);
+					System.out.println("Para eliminar un artículo, ingrese el código DOI del mismo: ");
+					String doi = sc.nextLine();
+					bajaArticulo(arregloArticulos, doi);
 				}
 				break;
 
 			case 4:
 				System.out.println(
-						"Que producto desea modificar?: " + "\n1) Electrónico" + "\n2) Alimento" + "\n3) Ropa");
+						"Que publicación desea modificar?: " + "\n1) Libro" + "\n2) Revista" + "\n3) Artículo");
 				int opcion4 = sc.nextInt();
 				sc.nextLine();
 				if (opcion4 == 1) {
-					System.out.println("Ingrese el código del electrónico: ");
-					String codigo1 = sc.nextLine();
-					modifLibro(arregloLibros, codigo1);
+					System.out.println("Ingrese el isbn del libro: ");
+					String isbn = sc.nextLine();
+					modifLibro(arregloLibros, isbn);
 				} else if (opcion4 == 2) {
-					System.out.println("Ingrese el código del alimento: ");
-					String codigo2 = sc.nextLine();
-					modifRevista(arregloRevistas, codigo2);
+					System.out.println("Ingrese el issn de la revista: ");
+					String issn = sc.nextLine();
+					modifRevista(arregloRevistas, issn);
 				} else if (opcion4 == 3) {
-					System.out.println("Ingrese el código de la prenda: ");
-					String codigo3 = sc.nextLine();
-					modifArticulo(arregloArticulos, codigo3);
+					System.out.println("Ingrese el doi del artículo: ");
+					String doi = sc.nextLine();
+					modifArticulo(arregloArticulos, doi);
 				}
 				break;
 
