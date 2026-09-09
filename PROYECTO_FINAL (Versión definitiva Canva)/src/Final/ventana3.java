@@ -1,6 +1,8 @@
 package Final;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 public class ventana3 extends JFrame{
 	public ventana3() {
 		this.setTitle("Ventana 3");
@@ -88,7 +90,25 @@ public class ventana3 extends JFrame{
         menusBut.setBounds(20, 205, 120, 40);
         salirBut.setBounds(20, 250, 120, 40);
 		
-        
+        productosBut.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				ventana4 ventana = new ventana4();
+		        ventana.setVisible(true);
+			}
+		});
+        menusBut.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				ventana12 ventana = new ventana12();
+				ventana.setVisible(true);
+				
+			}
+		});
 		
 		
 		this.add(panelito);	
@@ -142,9 +162,9 @@ public class ventana3 extends JFrame{
 	        g.drawRect(0, 0, 1366, 105);
 	        
 	        Graphics2D g2d = (Graphics2D) g;
-	        GradientPaint degradado = new GradientPaint(0, 750, new Color(47, 85, 151), 0, 300, new Color(47, 85, 151, 0));
-	        g2d.setPaint(degradado);
-	        g2d.fillRect(0, 0, getWidth(), getHeight());
+			GradientPaint degradado = new GradientPaint(0, 750, new Color(47, 85, 151, 0), 0, 300, new Color(47, 85, 151, 0));
+			g2d.setPaint(degradado);
+			g2d.fillRect(0, 0, getWidth(), getHeight());
 	        
 	        
 	   }

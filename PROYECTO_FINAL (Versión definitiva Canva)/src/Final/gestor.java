@@ -6,7 +6,6 @@ public class gestor {
 		ventana3 ventanita1 = new ventana3();
 		ventanita1.setVisible(true);
 		
-		
 	}
 
 }
