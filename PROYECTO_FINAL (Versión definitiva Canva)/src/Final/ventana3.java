@@ -83,12 +83,25 @@ public class ventana3 extends JFrame{
 		salirBut.setBackground(new Color(130, 152, 189));
 		salirBut.setFont(new Font("Arial", Font.BOLD, 15));
 		
+		
+		
 		inicioBut.setBounds(20, 25, 120, 40);
         productosBut.setBounds(20, 70, 120, 40);
         comprasBut.setBounds(20, 115, 120, 40);
         platosBut.setBounds(20, 160, 120, 40);
         menusBut.setBounds(20, 205, 120, 40);
         salirBut.setBounds(20, 250, 120, 40);
+        
+        
+        platosBut.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				ventana10 ventana = new ventana10();
+				ventana.setVisible(true);
+			}
+		});
 		
         productosBut.addActionListener(new ActionListener() {
 			
@@ -105,6 +118,16 @@ public class ventana3 extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 				ventana12 ventana = new ventana12();
+				ventana.setVisible(true);
+				
+			}
+		});
+        salirBut.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				ventana15 ventana = new ventana15();
 				ventana.setVisible(true);
 				
 			}

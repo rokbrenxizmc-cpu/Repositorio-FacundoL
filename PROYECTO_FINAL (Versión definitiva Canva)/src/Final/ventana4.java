@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 
 public class ventana4 extends JFrame {
 	public ventana4() {
-		this.setTitle("Ventana 3");
+		this.setTitle("Ventana 4");
 		this.setSize(1366, 688);
 		this.setResizable(false);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -82,6 +82,16 @@ public class ventana4 extends JFrame {
 		AgregarPBut.setBounds(50, 360, 200, 55);
 		VolverIBut.setBounds(300, 360, 200, 55);
 		
+		
+platosBut.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				ventana10 ventana = new ventana10();
+				ventana.setVisible(true);
+			}
+		});
 		menusBut.addActionListener(new ActionListener() {
 			
 			@Override
@@ -120,7 +130,17 @@ public class ventana4 extends JFrame {
 				
 			}
 		});
-
+salirBut.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				ventana15 ventana = new ventana15();
+				ventana.setVisible(true);
+				
+			}
+		});
+		
 		String[] columnas = { "Código", "Nombre", "Stock", "Unidad", "Sector" };
 
 		Object[][] datos = { { "Código", "Nombre", "Stock", "Unidad", "Sector" }, { 1, "Arroz", 25, "kg", "Despensa" },

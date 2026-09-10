@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 
 public class ventana12 extends JFrame {
 	public ventana12() {
-		this.setTitle("Ventana 3");
+		this.setTitle("Ventana 12");
 		this.setSize(1366, 688);
 		this.setResizable(false);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -82,6 +82,27 @@ public class ventana12 extends JFrame {
 		AgregarMBut.setBounds(50, 360, 200, 55);
 		PrepararMBut.setBounds(300, 360, 200, 55);
 		
+platosBut.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				ventana10 ventana = new ventana10();
+				ventana.setVisible(true);
+			}
+		});
+		
+		productosBut.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				ventana4 ventana = new ventana4();
+				ventana.setVisible(true);
+				
+			}
+		});
+		
 		PrepararMBut.addActionListener(new ActionListener() {
 			
 			@Override
@@ -107,11 +128,22 @@ public class ventana12 extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				
+				ventana14 ventana = new ventana14();
+				ventana.setVisible(true);
 
 			}
 		});
-
+		
+salirBut.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				ventana15 ventana = new ventana15();
+				ventana.setVisible(true);
+				
+			}
+		});
 		String[] columnas = { "Código", "Nombre", "Stock", "Unidad", "Sector" };
 
 		Object[][] datos = { { "Día", "Turno", "Plato", "Porciones", "Estado" },

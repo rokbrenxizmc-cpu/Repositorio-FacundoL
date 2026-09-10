@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 public class ventana5 extends JFrame {
 	public ventana5() {
 		String[] Sectores = {"Cámara", "Despensa", "Freezer"};
-		this.setTitle("Ventana 3");
+		this.setTitle("Ventana 5");
 		this.setSize(1366, 688);
 		this.setResizable(false);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -106,6 +106,16 @@ public class ventana5 extends JFrame {
 		GuardarPBut.setBounds(800, 300, 200, 55);
 		CancelarGBut.setBounds(800, 400, 200, 55);
 		
+		
+platosBut.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				ventana10 ventana = new ventana10();
+				ventana.setVisible(true);
+			}
+		});
 		CancelarGBut.addActionListener(new ActionListener() {
 			
 			@Override
@@ -132,6 +142,16 @@ public class ventana5 extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 				ventana4 ventana = new ventana4();
+				ventana.setVisible(true);
+				
+			}
+		});
+salirBut.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				ventana15 ventana = new ventana15();
 				ventana.setVisible(true);
 				
 			}

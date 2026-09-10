@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 
 public class ventana14 extends JFrame {
 	public ventana14() {
-		this.setTitle("Ventana 3");
+		this.setTitle("Ventana 14");
 		this.setSize(1366, 688);
 		this.setResizable(false);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -29,7 +29,7 @@ public class ventana14 extends JFrame {
 		rectanguloAzul2.setBackground(new Color(80, 112, 167));
 		rectanguloAzul2.setBounds(0, 0, 1700, 1700);
 
-		JLabel tituloInicio = new JLabel("Preparar Menú");
+		JLabel tituloInicio = new JLabel("Agregar Menú");
 		tituloInicio.setBounds(30, 25, 300, 35);
 		tituloInicio.setFont(new Font("Arial", Font.BOLD, 24));
 
@@ -99,6 +99,27 @@ public class ventana14 extends JFrame {
 		salirBut.setBounds(20, 250, 120, 40);
 		AgregarMBut.setBounds(50, 360, 200, 55);
 		CancelarMBut.setBounds(300, 360, 200, 55);
+		
+		
+platosBut.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				ventana10 ventana = new ventana10();
+				ventana.setVisible(true);
+			}
+		});
+		productosBut.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				ventana4 ventana = new ventana4();
+				ventana.setVisible(true);
+				
+			}
+		});
 
 		CancelarMBut.addActionListener(new ActionListener() {
 			
@@ -125,10 +146,20 @@ public class ventana14 extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				ventana12 ventana = new ventana12();
+				ventana13 ventana = new ventana13();
 				ventana.setVisible(true);
 				
 
+			}
+		});
+salirBut.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				ventana15 ventana = new ventana15();
+				ventana.setVisible(true);
+				
 			}
 		});
 
