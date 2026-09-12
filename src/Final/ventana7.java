@@ -5,10 +5,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ventana5 extends JFrame {
-	public ventana5() {
-		String[] Sectores = {"Cámara", "Despensa", "Freezer"};
-		this.setTitle("Ventana 5");
+public class ventana7 extends JFrame {
+	public ventana7() {
+		this.setTitle("Ventana 7");
 		this.setSize(1366, 688);
 		this.setResizable(false);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -29,13 +28,11 @@ public class ventana5 extends JFrame {
 		JPanel rectanguloAzul2 = new JPanel(null);
 		rectanguloAzul2.setBackground(new Color(80, 112, 167));
 		rectanguloAzul2.setBounds(0, 0, 1700, 1700);
-		JPanel rectanguloBlanco = new JPanel(null);
-		rectanguloBlanco.setBackground(new Color(255, 255, 255));
-		rectanguloBlanco.setBounds(30, 243, 760, 210);
 
-		JLabel tituloInicio = new JLabel("Productos");
+		JLabel tituloInicio = new JLabel("Compras registradas");
 		tituloInicio.setBounds(30, 25, 300, 35);
 		tituloInicio.setFont(new Font("Arial", Font.BOLD, 24));
+
 		JLabel barraSuperior = new JLabel("Sistema de Gestión del Comedor");
 		barraSuperior.setFont(new Font("Arial", Font.BOLD, 24));
 		barraSuperior.setBounds(30, 20, 500, 40);
@@ -43,27 +40,6 @@ public class ventana5 extends JFrame {
 		JLabel barraSuperior2 = new JLabel("UTU Arrayanes");
 		barraSuperior2.setBounds(1215, 20, 250, 40);
 		barraSuperior2.setForeground(Color.WHITE);
-		
-		JLabel tituloAgregarP = new JLabel("Agregar Producto");
-		tituloAgregarP.setBounds(30, 20, 300, 35);
-		tituloAgregarP.setFont(new Font("Arial", Font.BOLD, 24));
-		JLabel subTCodigo = new JLabel("Código:");
-		subTCodigo.setBounds(30, 60, 300, 35);
-		JLabel subTNombre = new JLabel("Nombre:");
-		subTNombre.setBounds(30, 110, 300, 35);
-		JTextField Codigo = new JTextField(20);
-		Codigo.setBounds(100, 60, 200, 40);
-		JTextField Nombre = new JTextField(20);
-		Nombre.setBounds(100, 110, 200, 40);
-		JLabel subTUnidad = new JLabel("Unidad:");
-		subTUnidad.setBounds(400, 60, 300, 35);
-		JTextField Unidad = new JTextField(20);
-		Unidad.setBounds(470, 60, 200, 40);
-		JLabel subTSector = new JLabel("Sector:");
-		subTSector.setBounds(400, 110, 200, 40);
-		JComboBox<String> comboSectores = new JComboBox<>(Sectores);
-		comboSectores.setBounds(470, 110, 200, 40);
-		
 		JButton inicioBut = new JButton("Inicio");
 		inicioBut.setText("<html><u>Inicio</u></html>");
 		inicioBut.setBackground(new Color(130, 152, 189));
@@ -88,14 +64,15 @@ public class ventana5 extends JFrame {
 		salirBut.setText("<html><u>Salir</u></html>");
 		salirBut.setBackground(new Color(130, 152, 189));
 		salirBut.setFont(new Font("Arial", Font.BOLD, 15));
-		JButton GuardarPBut = new JButton("Guardar");
-		GuardarPBut.setText("<html><u>Guardar</u></html>");
-		GuardarPBut.setBackground(new Color(255, 255, 255));
-		GuardarPBut.setFont(new Font("Arial", Font.BOLD, 15));
-		JButton CancelarGBut = new JButton("Cancelar");
-		CancelarGBut.setText("<html><u>Cancelar</u></html>");
-		CancelarGBut.setBackground(new Color(255, 255, 255));
-		CancelarGBut.setFont(new Font("Arial", Font.BOLD, 15));
+		JButton RegistrarCBut = new JButton("Registrar compra");
+		RegistrarCBut.setText("<html><u>Registrar compra</u></html>");
+		RegistrarCBut.setBackground(new Color(255, 255, 255));
+		RegistrarCBut.setFont(new Font("Arial", Font.BOLD, 15));
+		JButton volverIBut = new JButton("Volver al inicio");
+		volverIBut.setText("<html><u>Volver al inicio</u></html>");
+		volverIBut.setBackground(new Color(255, 255, 255));
+		volverIBut.setFont(new Font("Arial", Font.BOLD, 15));
+
 
 		inicioBut.setBounds(20, 25, 120, 40);
 		productosBut.setBounds(20, 70, 120, 40);
@@ -103,37 +80,32 @@ public class ventana5 extends JFrame {
 		platosBut.setBounds(20, 160, 120, 40);
 		menusBut.setBounds(20, 205, 120, 40);
 		salirBut.setBounds(20, 250, 120, 40);
-		GuardarPBut.setBounds(800, 300, 200, 55);
-		CancelarGBut.setBounds(800, 400, 200, 55);
+		RegistrarCBut.setBounds(50, 360, 200, 55);
+		volverIBut.setBounds(300, 360, 200, 55);
 		
-		 comprasBut.addActionListener(new ActionListener() {
-				
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					dispose();
-					ventana7 ventana = new ventana7();
-					ventana.setVisible(true);
-					
-				}
-			});
-platosBut.addActionListener(new ActionListener() {
+		volverIBut.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				ventana10 ventana = new ventana10();
+				ventana3 ventana = new ventana3();
+				ventana.setVisible(true);
+				
+			}
+		});
+		
+		
+		
+		menusBut.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				ventana12 ventana = new ventana12();
 				ventana.setVisible(true);
 			}
 		});
-		CancelarGBut.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				dispose();
-				ventana4 ventana = new ventana4();
-		        ventana.setVisible(true);
-			}
-		});
+		
 		inicioBut.addActionListener(new ActionListener() {
 			
 			@Override
@@ -142,10 +114,8 @@ platosBut.addActionListener(new ActionListener() {
 				ventana3 ventana = new ventana3();
 				ventana.setVisible(true);
 			}
-		
-			
 		});
-		GuardarPBut.addActionListener(new ActionListener() {
+		productosBut.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -155,7 +125,17 @@ platosBut.addActionListener(new ActionListener() {
 				
 			}
 		});
-salirBut.addActionListener(new ActionListener() {
+		RegistrarCBut.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				ventana8 ventana = new ventana8();
+				ventana.setVisible(true);
+				
+			}
+		});
+		salirBut.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -165,17 +145,24 @@ salirBut.addActionListener(new ActionListener() {
 				
 			}
 		});
+		platosBut.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				ventana10 ventana = new ventana10();
+				ventana.setVisible(true);
+			}
+		});
+		
+		String[] columnas = { "Nº Compra", "Fecha", "Productos", "Total", "Detalle" };
 
-		String[] columnas = { "Código", "Nombre", "Stock", "Unidad", "Sector" };
-
-		Object[][] datos = { { "Código", "Nombre", "Stock", "Unidad", "Sector" }, { 1, "Arroz", 25, "kg", "Despensa" },
-				{ 2, "Leche", 15, "litros", "Cámara" }, { 3, "Papas", 30, "kg", "Freezer" },
-				{ 4, "Huevos", 12, "docenas", "Cámara" }
-
+		Object[][] datos = { { "Nº Compra", "Fecha", "Productos", "Total", "Detalle" }, { 1, "01/08/2026", "3 productos", "$2650", "Ver" },
+				{ 2, "03/08/2026", "2 productos", "1480", "Ver" }
 		};
 
 		JTable tabla = new JTable(datos, columnas);
-		tabla.setBounds(30, 80, 1000, 150);
+		tabla.setBounds(30, 140, 1000, 250);
 		tabla.setRowHeight(50);
 
 		this.add(panelito);
@@ -187,21 +174,10 @@ salirBut.addActionListener(new ActionListener() {
 		panelito7.add(salirBut);
 
 		contenido.add(tituloInicio);
-		contenido.add(GuardarPBut);
-		contenido.add(CancelarGBut);
+		contenido.add(RegistrarCBut);
+		contenido.add(volverIBut);
 		contenido.add(tabla);
-		contenido.add(rectanguloBlanco);
-		rectanguloBlanco.add(tituloAgregarP);
-		rectanguloBlanco.add(subTCodigo);
-		rectanguloBlanco.add(subTNombre);
-		rectanguloBlanco.add(subTUnidad);
-		rectanguloBlanco.add(subTSector);
-		rectanguloBlanco.add(Codigo);
-		rectanguloBlanco.add(Nombre);
-		rectanguloBlanco.add(Unidad);
-		rectanguloBlanco.add(comboSectores);
-		
-		
+
 		panelito8.add(barraSuperior);
 		panelito8.add(barraSuperior2);
 		panelito8.add(rectanguloAzul);
@@ -223,13 +199,7 @@ salirBut.addActionListener(new ActionListener() {
 		g.drawRect(0, 0, 1366, 105);
 		
 		g.setColor(Color.BLACK);
-		g.drawRect(205, 185, 1000, 150);
-		
-		
-		g.setColor(Color.BLACK);
-		g.drawRect(205, 350, 760, 210);
-		
-		
+		g.drawRect(205, 245, 1000, 150);
 
 		Graphics2D g2d = (Graphics2D) g;
 		GradientPaint degradado = new GradientPaint(0, 750, new Color(47, 85, 151, 0), 0, 300, new Color(47, 85, 151, 0));

@@ -105,7 +105,7 @@ public class ventana14 extends JFrame {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					dispose();
-					ventana8 ventana = new ventana8();
+					ventana7 ventana = new ventana7();
 					ventana.setVisible(true);
 					
 				}

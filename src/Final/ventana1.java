@@ -1,144 +1,145 @@
 package Final;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Cursor;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-
 public class ventana1 extends JFrame {
-
 	public ventana1() {
-
-		this.setTitle("Sistema de Gestión del Comedor");
-		this.setSize(760, 430);
+		this.setTitle("Ventana 1");
+		this.setSize(1366, 688);
+		this.setResizable(false);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
-		this.setResizable(false);
-		this.setLayout(new BorderLayout());
-
-		// Título de la ventana
-		JPanel panelTitulo = new JPanel();
-		panelTitulo.setLayout(new FlowLayout(FlowLayout.LEFT));
-		panelTitulo.setBackground(Color.cyan);
-		panelTitulo.setPreferredSize(new Dimension(100, 45));
-
-		JLabel nombrePrograma = new JLabel("Sistema de Gestión del Comedor");
-		JLabel nombreInstitucion = new JLabel("UTU Arrayanes");
-		nombrePrograma.setPreferredSize(new Dimension(610, 35));
-
-		panelTitulo.add(nombrePrograma);
-		panelTitulo.add(nombreInstitucion);
-
-		// Formulario a la izquierda, dividido en cuatro filas
-		JPanel panelInicio = new JPanel();
-		panelInicio.setLayout(new GridLayout(4, 1));
-		panelInicio.setPreferredSize(new Dimension(245, 100));
-
-		JPanel panelIniciar = new JPanel();
-		JPanel panelCedula = new JPanel();
-		JPanel panelContra = new JPanel();
-		JPanel panelBoton = new JPanel();
-
-		panelIniciar.setLayout(new FlowLayout(FlowLayout.LEFT));
-		panelCedula.setLayout(new FlowLayout(FlowLayout.LEFT));
-		panelContra.setLayout(new FlowLayout(FlowLayout.LEFT));
-		panelBoton.setLayout(new FlowLayout(FlowLayout.CENTER));
-
-		JLabel tituloInicio = new JLabel("Iniciar sesión");
-		tituloInicio.setPreferredSize(new Dimension(220, 40));
-
-		JLabel txtIniciar = new JLabel("Ingrese la cédula del usuario:");
-		JTextField Fcedula = new JTextField(20);
-		JLabel txtContra = new JLabel("Ingrese la contraseña:");
-		JTextField FContra = new JTextField(20);
-
-		JButton BtnInicio = new JButton("Iniciar sesión");
-		BtnInicio.setPreferredSize(new Dimension(130, 30));
-
-		panelIniciar.add(tituloInicio);
-		panelCedula.add(txtIniciar);
-		panelCedula.add(Fcedula);
-		panelContra.add(txtContra);
-		panelContra.add(FContra);
-		panelBoton.add(BtnInicio);
-
-		panelInicio.add(panelIniciar);
-		panelInicio.add(panelCedula);
-		panelInicio.add(panelContra);
-		panelInicio.add(panelBoton);
-
-		// Panel liso en el lugar de la foto
-		JPanel panelComedor = new JPanel();
-		panelComedor.setBackground(Color.LIGHT_GRAY);
-
-		// Opción de crear cuenta debajo del formulario
-		JPanel panelPie = new JPanel();
-		panelPie.setLayout(new BorderLayout());
-		panelPie.setBackground(Color.cyan);
-		panelPie.setPreferredSize(new Dimension(100, 50));
-
-		JPanel panelCuenta = new JPanel();
-		panelCuenta.setLayout(new FlowLayout(FlowLayout.CENTER));
-		panelCuenta.setBackground(Color.cyan);
-		panelCuenta.setPreferredSize(new Dimension(245, 50));
-
-		JLabel txtCrearCuenta = new JLabel("¿No tienes una cuenta?");
-		JButton btnCreaCuenta = new JButton("<html><u>Créala</u></html>");
-		btnCreaCuenta.setPreferredSize(new Dimension(220, 20));
-		btnCreaCuenta.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		btnCreaCuenta.setBorderPainted(false);
-		btnCreaCuenta.setContentAreaFilled(false);
-		btnCreaCuenta.setFocusPainted(false);
-		btnCreaCuenta.setOpaque(false);
-
-		panelCuenta.add(txtCrearCuenta);
-		panelCuenta.add(btnCreaCuenta);
-		panelPie.add(panelCuenta, BorderLayout.WEST);
-
-		this.add(panelTitulo, BorderLayout.NORTH);
-		this.add(panelInicio, BorderLayout.WEST);
-		this.add(panelComedor, BorderLayout.CENTER);
-		this.add(panelPie, BorderLayout.SOUTH);
-
-		// Usuario de prueba, como en el ejercicio de inicio de sesión.
-		BtnInicio.addActionListener(new ActionListener() {
+		
+		JLabel tituloIniciarSesion = new JLabel("Iniciar sesión");
+		tituloIniciarSesion.setFont(new Font("Arial", Font.BOLD, 30));
+		tituloIniciarSesion.setBounds(64, 25, 200, 100);
+		JLabel ingresarC = new JLabel("Ingrese la cédula del usuario:");
+		ingresarC.setFont(new Font("Arial", Font.BOLD, 14));
+		ingresarC.setBounds(20, 55, 300, 200);
+		JTextField cedulaTF = new JTextField(20);
+		cedulaTF.setBounds(20, 180, 275, 35);
+		JLabel ingresarCont = new JLabel("Ingrese la contraseña:");
+		ingresarCont.setFont(new Font("Arial", Font.BOLD, 14));
+		ingresarCont.setBounds(20, 180, 300, 200);
+		JTextField contraTF = new JTextField(20);
+		contraTF.setBounds(20, 305, 275, 35);
+		
+		JButton IniciarSesion = new JButton("Iniciar Sesión");
+		IniciarSesion.setText("<html><u>Iniciar Sesión</u></html>");
+		IniciarSesion.setBounds(23, 385, 275, 65);
+		IniciarSesion.setBackground(Color.WHITE);
+		
+		IniciarSesion.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				String cedula = Fcedula.getText();
-				String clave = FContra.getText();
+				String cedula = cedulaTF.getText();
+				String clave = contraTF.getText();
 				String cedulaPrueba = "44325923";
 				String clavePrueba = "1234";
 
 				if (cedula.equals(cedulaPrueba) && clave.equals(clavePrueba)) {
 					dispose();
-					ventana3 compra = new ventana3();
-					compra.setVisible(true);
+					ventana3 ventana = new ventana3();
+					ventana.setVisible(true);
 				} else {
-					JOptionPane.showMessageDialog(BtnInicio, "Cédula o contraseña incorrectas.");
+					JOptionPane.showMessageDialog(null, "Cédula o contraseña incorrectas.");
 				}
 			}
 
 		});
+		
+		JPanel panelito = new JPanel(new BorderLayout());
+		JPanel rectanguloBlanco = new JPanel();
+		rectanguloBlanco.setLayout(null);
+		rectanguloBlanco.setPreferredSize(new Dimension(318, 0));
+		JPanel contenido = new JPanel();
+		contenido.setLayout(null);
+		JPanel panelito8 = new JPanel();
+		panelito8.setLayout(null);
+		panelito8.setPreferredSize(new Dimension(0, 75));
+		JPanel rectanguloAzul = new JPanel(null);
+		rectanguloAzul.setBackground(new Color(47, 85, 151));
+		rectanguloAzul.setBounds(0, 0, 1500, 1500);
+		JPanel rectanguloAzul2 = new JPanel(null);
+		rectanguloAzul2.setBackground(new Color(47, 85, 151));
+		rectanguloAzul2.setBounds(0, 500, 318, 75);
+		rectanguloBlanco.setBackground(new Color(255, 255, 255));
 
-		btnCreaCuenta.addActionListener(new ActionListener() {
-
+		JLabel barraSuperior = new JLabel("Sistema de Gestión del Comedor");
+		barraSuperior.setFont(new Font("Arial", Font.BOLD, 24));
+		barraSuperior.setBounds(30, 20, 500, 40);
+		barraSuperior.setForeground(Color.WHITE);
+		JLabel barraSuperior2 = new JLabel("UTU Arrayanes");
+		barraSuperior2.setBounds(1215, 20, 250, 40);
+		barraSuperior2.setForeground(Color.WHITE);
+		
+		JLabel subTNoCuenta = new JLabel("¿No tienes una cuenta?");
+		subTNoCuenta.setFont(new Font("Arial", Font.BOLD, 15));
+		subTNoCuenta.setBounds(70, 505, 500, 40);
+		subTNoCuenta.setForeground(Color.WHITE);
+		
+		JButton creala = new JButton("Créala");
+		creala.setText("<html><u>Créala</u></html>");
+		creala.setForeground(Color.WHITE);
+		creala.setBounds(100, 525, 100, 40);
+		creala.setContentAreaFilled(false);
+		creala.setBorderPainted(false);
+		
+		creala.addActionListener(new ActionListener() {
+			
+			@Override
 			public void actionPerformed(ActionEvent e) {
-				ventana2 crear = new ventana2();
-				crear.setVisible(true);
-				setVisible(false);
+				dispose();
+				ventana2 ventana = new ventana2();
+				ventana.setVisible(true);
+				
 			}
-
 		});
+		
+		ImageIcon cocina = new ImageIcon("coso.jpeg");
+		JLabel imagenLbl = new JLabel(cocina);
+		imagenLbl.setBounds(0, 0, 1035, 575);
+
+		this.add(panelito);
+		panelito8.add(barraSuperior);
+		panelito8.add(barraSuperior2);
+		panelito8.add(rectanguloAzul);
+		
+		rectanguloBlanco.add(tituloIniciarSesion);
+		rectanguloBlanco.add(ingresarC);
+		rectanguloBlanco.add(cedulaTF);
+		rectanguloBlanco.add(ingresarCont);
+		rectanguloBlanco.add(contraTF);
+		rectanguloBlanco.add(IniciarSesion);
+		rectanguloBlanco.add(subTNoCuenta);
+		rectanguloBlanco.add(creala);
+		rectanguloBlanco.add(rectanguloAzul2);
+		contenido.add(imagenLbl);
+		
+		panelito.add(contenido, BorderLayout.CENTER);
+		panelito.add(panelito8, BorderLayout.NORTH);
+		panelito.add(rectanguloBlanco, BorderLayout.WEST);
+	}
+
+	@Override
+	public void paint(Graphics g) {
+
+		super.paint(g);
+
+		g.setColor(Color.BLACK);
+		g.drawRect(0, 105, 325, 574);
+
+		g.setColor(Color.BLACK);
+		g.drawRect(0, 0, 1366, 105);
+
+		Graphics2D g2d = (Graphics2D) g;
+		GradientPaint degradado = new GradientPaint(0, 400, new Color(47, 85, 151, 100), 0, 200,
+				new Color(47, 85, 151, 0));
+		g2d.setPaint(degradado);
+		g2d.fillRect(326, 0, getWidth(), getHeight());
+
 	}
 }

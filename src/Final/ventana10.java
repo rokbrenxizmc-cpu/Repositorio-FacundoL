@@ -82,7 +82,7 @@ public class ventana10 extends JFrame {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					dispose();
-					ventana8 ventana = new ventana8();
+					ventana7 ventana = new ventana7();
 					ventana.setVisible(true);
 					
 				}
@@ -105,6 +105,16 @@ public class ventana10 extends JFrame {
 			dispose();	
 				ventana3 ventana = new ventana3();
 				ventana.setVisible(true);
+			}
+		});
+		productosBut.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				ventana4 ventana = new ventana4();
+				ventana.setVisible(true);
+				
 			}
 		});
 		AgregarPlBut.addActionListener(new ActionListener() {
