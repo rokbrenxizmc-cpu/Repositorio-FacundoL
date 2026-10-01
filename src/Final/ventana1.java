@@ -37,7 +37,7 @@ public class ventana1 extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String cedula = cedulaTF.getText();
 				String clave = contraTF.getText();
-				String cedulaPrueba = "44325923";
+				String cedulaPrueba = "1234";
 				String clavePrueba = "1234";
 
 				if (cedula.equals(cedulaPrueba) && clave.equals(clavePrueba)) {

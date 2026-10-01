@@ -6,7 +6,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class ventana8 extends JFrame {
-	public ventana8() {
+	public ventana8(ventana7 v7) {
+		String[] Unidad = {"Kilo", "Litro", "Docena"};
 		this.setTitle("Ventana 8");
 		this.setSize(1366, 688);
 		this.setResizable(false);
@@ -32,39 +33,45 @@ public class ventana8 extends JFrame {
 		JLabel tituloInicio = new JLabel("Registrar compra");
 		tituloInicio.setBounds(30, 25, 300, 35);
 		tituloInicio.setFont(new Font("Arial", Font.BOLD, 24));
-		JLabel tituloConfirmP = new JLabel("Datos de la compra");
-		tituloConfirmP.setBounds(65, 92, 300, 35);
-		tituloConfirmP.setFont(new Font("Arial", Font.BOLD, 20));
-		JLabel NºCompra = new JLabel("Nº de compra:");
-		NºCompra.setBounds(50, 140, 300, 35);
-		JTextField NºCompraR = new JTextField(20);
-		NºCompraR.setBounds(140, 140, 160, 40);
+		
+		JLabel Producto = new JLabel("Producto:");
+		Producto.setBounds(50, 140, 300, 35);
+		JTextField ProductoR = new JTextField(20);
+		ProductoR.setBounds(140, 140, 160, 40);
+		
+		JLabel lblCantidad = new JLabel("Cantidad:");
+		lblCantidad.setBounds(320, 140, 300, 40);
+		JTextField Cantidad = new JTextField(20);
+		Cantidad.setBounds(380, 140, 160, 40);
+		
+		JLabel lblUnidad = new JLabel("Unidad:");
+		lblUnidad.setBounds(55, 200, 300, 40);
+		JComboBox<String> comboUnidad = new JComboBox<>(Unidad);
+		comboUnidad.setBounds(140, 200, 160, 40);
+		
 		JLabel lblFecha = new JLabel("Fecha:");
-		lblFecha.setBounds(320, 140, 300, 40);
+		lblFecha.setBounds(330, 200, 300, 40);
 		JTextField Fecha = new JTextField(20);
-		Fecha.setBounds(380, 140, 160, 40);
+		Fecha.setBounds(380, 200, 160, 40);
 		
-		JLabel subTDescont = new JLabel("Detalle de los productos comprados");
-		subTDescont.setFont(new Font("Arial", Font.BOLD, 14));
-		subTDescont.setBounds(65, 180, 300, 40);
+		JLabel lblPrecioUnit = new JLabel("Precio unit.:");
+		lblPrecioUnit.setBounds(50, 260, 300, 40);
+		JTextField PrecioUnit = new JTextField(20);
+		PrecioUnit.setBounds(140, 260, 160, 40);
+		
+		JLabel lblVencimiento = new JLabel("Vencimiento:");
+		lblVencimiento.setBounds(305, 260, 300, 40);
+		JTextField Vencimiento = new JTextField(20);
+		Vencimiento.setBounds(380, 260, 160, 40);
+		
+		JLabel lblSubtotal = new JLabel("Subtotal:");
+		lblSubtotal.setBounds(55, 320, 300, 40);
+		JTextField Subtotal = new JTextField(20);
+		Subtotal.setBounds(140, 320, 160, 40);
 		
 		
 		
 		
-		
-		JLabel subTRest1 = new JLabel("Al guardar, el sistema suma estas cantidades al stock");
-		subTRest1.setBounds(55, 270, 400, 290);
-		subTRest1.setForeground(Color.GRAY);
-		JLabel subTRest2 = new JLabel("actual de cada producto.");
-		subTRest2.setBounds(55, 290, 400, 290);
-		subTRest2.setForeground(Color.GRAY);
-		
-		JLabel ej1 = new JLabel("Total compra:");
-		ej1.setFont(new Font("Arial", Font.BOLD, 13));
-		ej1.setBounds(500, 373, 200, 100);
-		JLabel ej2 = new JLabel("$2650");
-		ej2.setFont(new Font("Arial", Font.BOLD, 13));
-		ej2.setBounds(523, 393, 200, 100);
 		
 		JLabel barraSuperior = new JLabel("Sistema de Gestión del Comedor");
 		barraSuperior.setFont(new Font("Arial", Font.BOLD, 24));
@@ -126,6 +133,33 @@ public class ventana8 extends JFrame {
 					
 				}
 			});
+		 
+		 GuardarCBut.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String p = Producto.getText();
+				String c = Cantidad.getText();
+				String u = comboUnidad.getSelectedItem().toString();
+				String f = Fecha.getText();
+				String pU = PrecioUnit.getText();
+				String v = Vencimiento.getText();
+				String s = Subtotal.getText();
+				
+				if (Producto.getText().isEmpty() || Cantidad.getText().isEmpty() || Fecha.getText().isEmpty() || PrecioUnit.getText().isEmpty() || Vencimiento.getText().isEmpty() || Subtotal.getText().isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Falta rellenar información...");
+				}else {
+					int cantidad = Integer.parseInt(c);
+					float precioUnit = Integer.parseInt(pU);
+					float subT = Integer.parseInt(s);
+					v7.altaCompra(p, cantidad, u, f, precioUnit, v, subT);
+					dispose();
+					v7.setVisible(true);
+				}
+				
+			}
+		});
+		 
 platosBut.addActionListener(new ActionListener() {
 			
 			@Override
@@ -207,18 +241,9 @@ salirBut.addActionListener(new ActionListener() {
 			}
 		});
 
-	String[] columnas = {"Producto", "Cantidad", "Unidad", "Precio unit.", "Vencimiento", "Subtotal"};
-	Object[][] datos = {
-		{"Producto", "Cantidad", "Unidad", "Precio unit.", "Vencimiento", "Subtotal"},
-		{"Arroz", 20, "kg", "$45", "25/09/2026", "$900"},
-		{"Leche", 15, "litros", "$50", "20/08/2026", "$750"},
-		{"Huevos", 10, "docenas", "$100", "18/08/2026", "$1000"},
-		{"+ agregar otro ingrediente", "", "", "", "", ""}
-		};
+	
 
-		JTable tabla = new JTable(datos, columnas);
-		tabla.setBounds(45, 220, 680, 175);
-		tabla.setRowHeight(35);
+		
 
 		this.add(panelito);
 		panelito7.add(inicioBut);
@@ -230,20 +255,21 @@ salirBut.addActionListener(new ActionListener() {
 
 		contenido.add(tituloInicio);
 		contenido.add(GuardarCBut);
-		contenido.add(tabla);
 		contenido.add(CancelarPBut);
-		contenido.add(tituloConfirmP);
-		contenido.add(NºCompra);
-		contenido.add(NºCompraR);
+		contenido.add(Producto);
+		contenido.add(ProductoR);
+		contenido.add(lblCantidad);
+		contenido.add(Cantidad);
+		contenido.add(lblUnidad);
+		contenido.add(comboUnidad);
 		contenido.add(lblFecha);
 		contenido.add(Fecha);
-		contenido.add(subTDescont);
-		contenido.add(subTRest1);
-		contenido.add(subTRest2);
-
-
-		contenido.add(ej1);
-		contenido.add(ej2);
+		contenido.add(lblPrecioUnit);
+		contenido.add(PrecioUnit);
+		contenido.add(lblVencimiento);
+		contenido.add(Vencimiento);
+		contenido.add(lblSubtotal);
+		contenido.add(Subtotal);
 		
 		panelito8.add(barraSuperior);
 		panelito8.add(barraSuperior2);
@@ -266,12 +292,9 @@ salirBut.addActionListener(new ActionListener() {
 		g.drawRect(0, 0, 1366, 105);
 
 		g.setColor(Color.BLACK);
-		g.drawRect(205, 185, 750, 400);
+		g.drawRect(205, 185, 600, 400);
 		
-		g.setColor(Color.BLACK);
-		g.drawRect(220, 325, 680, 175);
 		
-		g.setColor(Color.GREEN);
-		g.drawRect(650, 515, 140, 50);
+
 	}
 }

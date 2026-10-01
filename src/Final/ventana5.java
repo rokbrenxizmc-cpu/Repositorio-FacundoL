@@ -6,7 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class ventana5 extends JFrame {
-	public ventana5() {
+	public ventana5(ventana4 v4) {
 		String[] Sectores = {"Cámara", "Despensa", "Freezer"};
 		this.setTitle("Ventana 5");
 		this.setSize(1366, 688);
@@ -51,6 +51,10 @@ public class ventana5 extends JFrame {
 		subTCodigo.setBounds(30, 60, 300, 35);
 		JLabel subTNombre = new JLabel("Nombre:");
 		subTNombre.setBounds(30, 110, 300, 35);
+		JLabel subTStock = new JLabel("Stock:");
+		subTStock.setBounds(30, 160, 300, 35);
+		JTextField Stock = new JTextField(20);
+		Stock.setBounds(100, 160, 200, 40);
 		JTextField Codigo = new JTextField(20);
 		Codigo.setBounds(100, 60, 200, 40);
 		JTextField Nombre = new JTextField(20);
@@ -149,9 +153,20 @@ platosBut.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				dispose();
-				ventana4 ventana = new ventana4();
-				ventana.setVisible(true);
+				String c = Codigo.getText();
+				String n = Nombre.getText();
+				String st = Stock.getText();
+				String u = Unidad.getText();
+				String sector = comboSectores.getSelectedItem().toString();
+				if (Codigo.getText().isEmpty() || Nombre.getText().isEmpty() || Stock.getText().isEmpty() || Unidad.getText().isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Falta rellenar información...");
+				}else {
+					int codigo = Integer.parseInt(c);
+					int stock = Integer.parseInt(st);
+					v4.altaProducto(codigo, n, stock, u, sector);
+					dispose();
+					v4.setVisible(true);
+				}
 				
 			}
 		});
@@ -196,6 +211,8 @@ salirBut.addActionListener(new ActionListener() {
 		rectanguloBlanco.add(subTNombre);
 		rectanguloBlanco.add(subTUnidad);
 		rectanguloBlanco.add(subTSector);
+		rectanguloBlanco.add(subTStock);
+		rectanguloBlanco.add(Stock);
 		rectanguloBlanco.add(Codigo);
 		rectanguloBlanco.add(Nombre);
 		rectanguloBlanco.add(Unidad);

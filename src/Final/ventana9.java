@@ -190,7 +190,7 @@ public class ventana9 extends JFrame {
 		btnVolver.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				ventana8 registrar = new ventana8();
+				ventana8 registrar = new ventana8(null);
 				registrar.setVisible(true);
 				setVisible(false);
 			}

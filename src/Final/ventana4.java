@@ -1,11 +1,14 @@
 package Final;
-
+import java.util.ArrayList;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class ventana4 extends JFrame {
+	ArrayList<Producto> listaP = new ArrayList<>(); 
 	public ventana4() {
 		this.setTitle("Ventana 4");
 		this.setSize(1366, 688);
@@ -68,6 +71,10 @@ public class ventana4 extends JFrame {
 		AgregarPBut.setText("<html><u>Agregar Producto</u></html>");
 		AgregarPBut.setBackground(new Color(255, 255, 255));
 		AgregarPBut.setFont(new Font("Arial", Font.BOLD, 15));
+		JButton ActualizarP = new JButton("Actualizar lista");
+		ActualizarP.setText("<html><u>Actualizar lista</u></html>");
+		ActualizarP.setBackground(new Color(255, 255, 255));
+		ActualizarP.setFont(new Font("Arial", Font.BOLD, 15));
 		JButton VolverIBut = new JButton("Volver al Inicio");
 		VolverIBut.setText("<html><u>Volver al Inicio</u></html>");
 		VolverIBut.setBackground(new Color(255, 255, 255));
@@ -80,7 +87,10 @@ public class ventana4 extends JFrame {
 		menusBut.setBounds(20, 205, 120, 40);
 		salirBut.setBounds(20, 250, 120, 40);
 		AgregarPBut.setBounds(50, 360, 200, 55);
-		VolverIBut.setBounds(300, 360, 200, 55);
+		ActualizarP.setBounds(300, 360, 200, 55);
+		VolverIBut.setBounds(550, 360, 200, 55);
+		
+		
 		
 		 comprasBut.addActionListener(new ActionListener() {
 				
@@ -133,9 +143,8 @@ platosBut.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				dispose();
-				ventana5 ventana = new ventana5();
-				ventana.setVisible(true);
+				new ventana5(ventana4.this).setVisible(true);
+				
 				
 			}
 		});
@@ -151,17 +160,20 @@ salirBut.addActionListener(new ActionListener() {
 		});
 		
 		String[] columnas = { "Código", "Nombre", "Stock", "Unidad", "Sector" };
-
-		Object[][] datos = { { "Código", "Nombre", "Stock", "Unidad", "Sector" }, { 1, "Arroz", 25, "kg", "Despensa" },
-				{ 2, "Leche", 15, "litros", "Cámara" }, { 3, "Papas", 30, "kg", "Freezer" },
-				{ 4, "Huevos", 12, "docenas", "Cámara" }
-
-		};
-
-		JTable tabla = new JTable(datos, columnas);
-		tabla.setBounds(30, 80, 1000, 250);
-		tabla.setRowHeight(50);
-
+		DefaultTableModel modeloTabl = new DefaultTableModel(columnas, 0);
+		JTable tabla = new JTable(modeloTabl);
+		JScrollPane scroll = new JScrollPane(tabla);
+		scroll.setBounds(30, 80, 1000, 250);
+		
+ActualizarP.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				actProductos(modeloTabl);
+				
+			}
+		});
+		
 		this.add(panelito);
 		panelito7.add(inicioBut);
 		panelito7.add(productosBut);
@@ -173,7 +185,8 @@ salirBut.addActionListener(new ActionListener() {
 		contenido.add(tituloInicio);
 		contenido.add(AgregarPBut);
 		contenido.add(VolverIBut);
-		contenido.add(tabla);
+		contenido.add(scroll);
+		contenido.add(ActualizarP);
 
 		panelito8.add(barraSuperior);
 		panelito8.add(barraSuperior2);
@@ -203,5 +216,16 @@ salirBut.addActionListener(new ActionListener() {
 		g2d.setPaint(degradado);
 		g2d.fillRect(0, 0, getWidth(), getHeight());
 
+	}
+	public void altaProducto(int codigo, String nombre, int stock, String unidad, String sector) {
+		Producto p = new Producto(codigo, nombre, stock, unidad, sector);
+		listaP.add(p);
+	}
+	public void actProductos(DefaultTableModel m) {
+		m.setRowCount(0);
+		for (Producto p:listaP) {
+			Object[] fila = {p.getCodigo(), p.getNombre(), p.getStock(), p.getUnidad(), p.getSector()};
+			m.addRow(fila);
+		}
 	}
 }

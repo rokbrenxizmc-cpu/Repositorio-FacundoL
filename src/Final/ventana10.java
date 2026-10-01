@@ -1,11 +1,15 @@
 package Final;
-
+import javax.swing.table.DefaultTableModel;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class ventana10 extends JFrame {
+
+	ArrayList<Plato> listaPl = new ArrayList<>();
+
 	public ventana10() {
 		this.setTitle("Ventana 10");
 		this.setSize(1366, 688);
@@ -22,9 +26,11 @@ public class ventana10 extends JFrame {
 		JPanel panelito8 = new JPanel();
 		panelito8.setLayout(null);
 		panelito8.setPreferredSize(new Dimension(0, 75));
+
 		JPanel rectanguloAzul = new JPanel(null);
 		rectanguloAzul.setBackground(new Color(47, 85, 151));
 		rectanguloAzul.setBounds(0, 0, 1500, 1500);
+
 		JPanel rectanguloAzul2 = new JPanel(null);
 		rectanguloAzul2.setBackground(new Color(80, 112, 167));
 		rectanguloAzul2.setBounds(0, 0, 1700, 1700);
@@ -37,37 +43,50 @@ public class ventana10 extends JFrame {
 		barraSuperior.setFont(new Font("Arial", Font.BOLD, 24));
 		barraSuperior.setBounds(30, 20, 500, 40);
 		barraSuperior.setForeground(Color.WHITE);
+
 		JLabel barraSuperior2 = new JLabel("UTU Arrayanes");
 		barraSuperior2.setBounds(1215, 20, 250, 40);
 		barraSuperior2.setForeground(Color.WHITE);
+
 		JButton inicioBut = new JButton("Inicio");
 		inicioBut.setText("<html><u>Inicio</u></html>");
 		inicioBut.setBackground(new Color(130, 152, 189));
 		inicioBut.setFont(new Font("Arial", Font.BOLD, 15));
+
 		JButton productosBut = new JButton("Productos");
 		productosBut.setText("<html><u>Productos</u></html>");
 		productosBut.setBackground(new Color(130, 152, 189));
 		productosBut.setFont(new Font("Arial", Font.BOLD, 15));
+
 		JButton comprasBut = new JButton("Compras");
 		comprasBut.setText("<html><u>Compras</u></html>");
 		comprasBut.setBackground(new Color(130, 152, 189));
 		comprasBut.setFont(new Font("Arial", Font.BOLD, 15));
+
 		JButton platosBut = new JButton("Platos");
 		platosBut.setText("<html><u>Platos</u></html>");
 		platosBut.setBackground(new Color(130, 152, 189));
 		platosBut.setFont(new Font("Arial", Font.BOLD, 15));
+
 		JButton menusBut = new JButton("Menús");
 		menusBut.setText("<html><u>Menús</u></html>");
 		menusBut.setBackground(new Color(130, 152, 189));
 		menusBut.setFont(new Font("Arial", Font.BOLD, 15));
+
 		JButton salirBut = new JButton("Salir");
 		salirBut.setText("<html><u>Salir</u></html>");
 		salirBut.setBackground(new Color(130, 152, 189));
 		salirBut.setFont(new Font("Arial", Font.BOLD, 15));
+
 		JButton AgregarPlBut = new JButton("Agregar Plato");
 		AgregarPlBut.setText("<html><u>Agregar Plato</u></html>");
 		AgregarPlBut.setBackground(new Color(255, 255, 255));
 		AgregarPlBut.setFont(new Font("Arial", Font.BOLD, 15));
+
+		JButton ActualizarPl = new JButton("Actualizar lista");
+		ActualizarPl.setText("<html><u>Actualizar lista</u></html>");
+		ActualizarPl.setBackground(new Color(255, 255, 255));
+		ActualizarPl.setFont(new Font("Arial", Font.BOLD, 15));
 
 		inicioBut.setBounds(20, 25, 120, 40);
 		productosBut.setBounds(20, 70, 120, 40);
@@ -76,20 +95,21 @@ public class ventana10 extends JFrame {
 		menusBut.setBounds(20, 205, 120, 40);
 		salirBut.setBounds(20, 250, 120, 40);
 		AgregarPlBut.setBounds(50, 360, 200, 55);
-		
-		 comprasBut.addActionListener(new ActionListener() {
-				
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					dispose();
-					ventana7 ventana = new ventana7();
-					ventana.setVisible(true);
-					
-				}
-			});
-		
+		ActualizarPl.setBounds(280, 360, 200, 55);
+
+		comprasBut.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				ventana7 ventana = new ventana7();
+				ventana.setVisible(true);
+
+			}
+		});
+
 		menusBut.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
@@ -97,58 +117,69 @@ public class ventana10 extends JFrame {
 				ventana.setVisible(true);
 			}
 		});
-		
+
 		inicioBut.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-			dispose();	
+				dispose();
 				ventana3 ventana = new ventana3();
 				ventana.setVisible(true);
 			}
 		});
+
 		productosBut.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 				ventana4 ventana = new ventana4();
 				ventana.setVisible(true);
-				
+
 			}
 		});
+
 		AgregarPlBut.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				ventana11 ventana = new ventana11();
+				ventana11 ventana = new ventana11(ventana10.this);
 				ventana.setVisible(true);
-				
+
 			}
 		});
+
 		salirBut.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 				ventana15 ventana = new ventana15();
 				ventana.setVisible(true);
-				
+
 			}
 		});
-		
+
 		String[] columnas = { "Código", "Nombre", "Vegetariano" };
 
-		Object[][] datos = { { "Código", "Nombre", "Vegetariano" }, { 1, "Bondiola con papas", "No" },
-				{ 2, "Arroz con verduras", "Si" }
-		};
+		DefaultTableModel modeloTabl = new DefaultTableModel(null, columnas);
 
-		JTable tabla = new JTable(datos, columnas);
-		tabla.setBounds(30, 140, 1000, 250);
+		JTable tabla = new JTable(modeloTabl);
+		JScrollPane scroll = new JScrollPane(tabla);
+		scroll.setBounds(30, 80, 1000, 250);
 		tabla.setRowHeight(50);
 
+		ActualizarPl.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				actPlatos(modeloTabl);
+			}
+		});
+
 		this.add(panelito);
+
 		panelito7.add(inicioBut);
 		panelito7.add(productosBut);
 		panelito7.add(comprasBut);
@@ -158,15 +189,41 @@ public class ventana10 extends JFrame {
 
 		contenido.add(tituloInicio);
 		contenido.add(AgregarPlBut);
-		contenido.add(tabla);
+		contenido.add(ActualizarPl);
+		contenido.add(scroll);
 
 		panelito8.add(barraSuperior);
 		panelito8.add(barraSuperior2);
 		panelito8.add(rectanguloAzul);
+
 		panelito7.add(rectanguloAzul2);
+
 		panelito.add(panelito7, BorderLayout.WEST);
 		panelito.add(contenido, BorderLayout.CENTER);
 		panelito.add(panelito8, BorderLayout.NORTH);
+	}
+
+	public void altaPlato(int codigo, String nombre, String vegetariano) {
+
+		Plato p = new Plato(codigo, nombre, vegetariano);
+
+		listaPl.add(p);
+	}
+
+	public void actPlatos(DefaultTableModel m) {
+
+		m.setRowCount(0);
+
+		for (Plato p : listaPl) {
+
+			Object[] fila = {
+				p.getCodigo(),
+				p.getNombre(),
+				p.getVegetariano()
+			};
+
+			m.addRow(fila);
+		}
 	}
 
 	@Override
@@ -179,14 +236,19 @@ public class ventana10 extends JFrame {
 
 		g.setColor(Color.BLACK);
 		g.drawRect(0, 0, 1366, 105);
-		
+
 		g.setColor(Color.BLACK);
-		g.drawRect(205, 245, 1000, 150);
+		g.drawRect(205, 186, 1000, 248);
 
 		Graphics2D g2d = (Graphics2D) g;
-		GradientPaint degradado = new GradientPaint(0, 750, new Color(47, 85, 151, 0), 0, 300, new Color(47, 85, 151, 0));
+		GradientPaint degradado = new GradientPaint(
+			0, 750,
+			new Color(47, 85, 151, 0),
+			0, 300,
+			new Color(47, 85, 151, 0)
+		);
+
 		g2d.setPaint(degradado);
 		g2d.fillRect(0, 0, getWidth(), getHeight());
-
 	}
 }

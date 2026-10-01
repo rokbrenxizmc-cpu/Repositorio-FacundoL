@@ -6,7 +6,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class ventana14 extends JFrame {
-	public ventana14() {
+	public ventana14(ventana12 v12) {
+		String[] Estado = {"Planificado", "Pendiente"};
 		this.setTitle("Ventana 14");
 		this.setSize(1366, 688);
 		this.setResizable(false);
@@ -49,6 +50,8 @@ public class ventana14 extends JFrame {
 		subTPlato.setBounds(57, 220, 100, 100);
 		JLabel subTPorciones = new JLabel("Porciones:");
 		subTPorciones.setBounds(360, 80, 100, 100);
+		JLabel subTEstado = new JLabel("Estado:");
+		subTEstado.setBounds(360, 149, 100, 100);
 		JTextField DiaText = new JTextField(20);
 		DiaText.setBounds(100, 105, 200, 50);
 		JTextField TurnoText = new JTextField(20);
@@ -57,6 +60,9 @@ public class ventana14 extends JFrame {
 		PlatoText.setBounds(100, 245, 200, 50);
 		JTextField PorcionesText = new JTextField(20);
 		PorcionesText.setBounds(435, 105, 200, 50);
+		JComboBox<String> comboEstados = new JComboBox<>(Estado);
+		comboEstados.setBounds(435, 175, 200, 50);
+		
 		
 		JButton inicioBut = new JButton("Inicio");
 		inicioBut.setText("<html><u>Inicio</u></html>");
@@ -154,10 +160,22 @@ platosBut.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				dispose();
-				ventana13 ventana = new ventana13();
-				ventana.setVisible(true);
-				
+				/*dispose();
+				ventana12 ventana = new ventana12();
+				ventana.setVisible(true);*/
+				String d = DiaText.getText();
+				String t = TurnoText.getText();
+				String p = PlatoText.getText();
+				String por = PorcionesText.getText();
+				String es = comboEstados.getSelectedItem().toString();
+				if (DiaText.getText().isEmpty() || TurnoText.getText().isEmpty() || PlatoText.getText().isEmpty() || PorcionesText.getText().isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Falta rellenar información...");
+				}else {
+					int porciones = Integer.parseInt(por);
+					v12.altaMenu(d, t, p, porciones, es);
+					dispose();
+					v12.setVisible(true);
+				}
 
 			}
 		});
@@ -192,6 +210,8 @@ salirBut.addActionListener(new ActionListener() {
 		contenido.add(TurnoText);
 		contenido.add(PlatoText);
 		contenido.add(PorcionesText);
+		contenido.add(subTEstado);
+		contenido.add(comboEstados);
 
 
 		panelito8.add(barraSuperior);

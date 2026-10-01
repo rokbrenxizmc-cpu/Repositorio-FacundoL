@@ -1,11 +1,15 @@
 package Final;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class ventana12 extends JFrame {
+	ArrayList<Menu> listaM = new ArrayList<>(); 
 	public ventana12() {
 		this.setTitle("Ventana 12");
 		this.setSize(1366, 688);
@@ -72,7 +76,11 @@ public class ventana12 extends JFrame {
 		PrepararMBut.setText("<html><u>Preparar Menú</u></html>");
 		PrepararMBut.setBackground(new Color(255, 255, 255));
 		PrepararMBut.setFont(new Font("Arial", Font.BOLD, 15));
-		
+		JButton ActualizarMBut = new JButton("Actualizar");
+		ActualizarMBut.setText("<html><u>Actualizar</u></html>");
+		ActualizarMBut.setBackground(new Color(255, 255, 255));
+		ActualizarMBut.setFont(new Font("Arial", Font.BOLD, 15));
+
 		inicioBut.setBounds(20, 25, 120, 40);
 		productosBut.setBounds(20, 70, 120, 40);
 		comprasBut.setBounds(20, 115, 120, 40);
@@ -80,21 +88,20 @@ public class ventana12 extends JFrame {
 		menusBut.setBounds(20, 205, 120, 40);
 		salirBut.setBounds(20, 250, 120, 40);
 		AgregarMBut.setBounds(50, 360, 200, 55);
-		PrepararMBut.setBounds(300, 360, 200, 55);
-		
-		
-		 comprasBut.addActionListener(new ActionListener() {
-				
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					dispose();
-					ventana7 ventana = new ventana7();
-					ventana.setVisible(true);
-					
-				}
-			});
-platosBut.addActionListener(new ActionListener() {
-			
+		ActualizarMBut.setBounds(300, 360, 200, 55);
+
+		comprasBut.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				ventana7 ventana = new ventana7();
+				ventana.setVisible(true);
+
+			}
+		});
+		platosBut.addActionListener(new ActionListener() {
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
@@ -102,28 +109,26 @@ platosBut.addActionListener(new ActionListener() {
 				ventana.setVisible(true);
 			}
 		});
-		
+
 		productosBut.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 				ventana4 ventana = new ventana4();
 				ventana.setVisible(true);
-				
+
 			}
 		});
-		
-		PrepararMBut.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				dispose();
-				ventana14 ventana = new ventana14();
-				ventana.setVisible(true);
-				
-			}
-		});
+
+		/*
+		 * PrepararMBut.addActionListener(new ActionListener() {
+		 * 
+		 * @Override public void actionPerformed(ActionEvent e) { dispose(); ventana14
+		 * ventana = new ventana14(); ventana.setVisible(true);
+		 * 
+		 * } });
+		 */
 
 		inicioBut.addActionListener(new ActionListener() {
 
@@ -139,35 +144,40 @@ platosBut.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				ventana14 ventana = new ventana14();
-				ventana.setVisible(true);
+				new ventana14(ventana12.this).setVisible(true);
 
 			}
 		});
-		
-salirBut.addActionListener(new ActionListener() {
-			
+
+		salirBut.addActionListener(new ActionListener() {
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 				ventana15 ventana = new ventana15();
 				ventana.setVisible(true);
+
+			}
+		});
+		
+		
+		
+		String[] columnas = { "Código", "Nombre", "Stock", "Unidad", "Sector" };
+		DefaultTableModel modeloTabl = new DefaultTableModel(columnas, 0);
+		JTable tabla = new JTable(modeloTabl);
+		JScrollPane scroll = new JScrollPane(tabla);
+		scroll.setBounds(30, 80, 1000, 250);
+		
+		tabla.setRowHeight(50);
+		
+ActualizarMBut.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				actMenu(modeloTabl);
 				
 			}
 		});
-		String[] columnas = { "Código", "Nombre", "Stock", "Unidad", "Sector" };
-
-		Object[][] datos = { { "Día", "Turno", "Plato", "Porciones", "Estado" },
-				{ "Lunes", "Almuerzo", "Bondiola con papas", 80, "Planificado" },
-				{ "Lunes", "Cena", "Fideos con tuco", 70, "Planificado" },
-				{ "Martes", "Almuerzo", "Arroz con verduras", 85, "Planificado" },
-				{ "Martes", "Cena", "Tortilla de papa", 85, "Planificado" }
-
-		};
-
-		JTable tabla = new JTable(datos, columnas);
-		tabla.setBounds(30, 80, 1000, 250);
-		tabla.setRowHeight(50);
 
 		this.add(panelito);
 		panelito7.add(inicioBut);
@@ -179,8 +189,9 @@ salirBut.addActionListener(new ActionListener() {
 
 		contenido.add(tituloInicio);
 		contenido.add(AgregarMBut);
-		contenido.add(tabla);
-		contenido.add(PrepararMBut);
+		contenido.add(scroll);
+		contenido.add(ActualizarMBut);
+		// contenido.add(PrepararMBut);
 
 		panelito8.add(barraSuperior);
 		panelito8.add(barraSuperior2);
@@ -211,5 +222,16 @@ salirBut.addActionListener(new ActionListener() {
 		g2d.setPaint(degradado);
 		g2d.fillRect(0, 0, getWidth(), getHeight());
 
+	}
+	public void altaMenu(String d, String t, String p, int por, String es) {
+		Menu m = new Menu(d, t, p, por, es);
+		listaM.add(m);
+	}
+	public void actMenu(DefaultTableModel d) {
+		d.setRowCount(0);
+		for (Menu m:listaM) {
+			Object[] fila = {m.getDia(), m.getTurno(), m.getPlato(), m.getPorciones(), m.getEstado()};
+			d.addRow(fila);
+		}
 	}
 }

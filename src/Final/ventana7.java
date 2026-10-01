@@ -1,11 +1,16 @@
 package Final;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class ventana7 extends JFrame {
+	ArrayList<Compra> listaC = new ArrayList<>();
+
 	public ventana7() {
 		this.setTitle("Ventana 7");
 		this.setSize(1366, 688);
@@ -72,7 +77,10 @@ public class ventana7 extends JFrame {
 		volverIBut.setText("<html><u>Volver al inicio</u></html>");
 		volverIBut.setBackground(new Color(255, 255, 255));
 		volverIBut.setFont(new Font("Arial", Font.BOLD, 15));
-
+		JButton ActualizarCBut = new JButton("Actualizar");
+		ActualizarCBut.setText("<html><u>Actualizar</u></html>");
+		ActualizarCBut.setBackground(new Color(255, 255, 255));
+		ActualizarCBut.setFont(new Font("Arial", Font.BOLD, 15));
 
 		inicioBut.setBounds(20, 25, 120, 40);
 		productosBut.setBounds(20, 70, 120, 40);
@@ -82,22 +90,21 @@ public class ventana7 extends JFrame {
 		salirBut.setBounds(20, 250, 120, 40);
 		RegistrarCBut.setBounds(50, 360, 200, 55);
 		volverIBut.setBounds(300, 360, 200, 55);
-		
+		ActualizarCBut.setBounds(550, 360, 200, 55);
+
 		volverIBut.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 				ventana3 ventana = new ventana3();
 				ventana.setVisible(true);
-				
+
 			}
 		});
-		
-		
-		
+
 		menusBut.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
@@ -105,48 +112,46 @@ public class ventana7 extends JFrame {
 				ventana.setVisible(true);
 			}
 		});
-		
+
 		inicioBut.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-			dispose();	
+				dispose();
 				ventana3 ventana = new ventana3();
 				ventana.setVisible(true);
 			}
 		});
 		productosBut.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 				ventana4 ventana = new ventana4();
 				ventana.setVisible(true);
-				
+
 			}
 		});
 		RegistrarCBut.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				new ventana8(ventana7.this).setVisible(true);
 				dispose();
-				ventana8 ventana = new ventana8();
-				ventana.setVisible(true);
-				
 			}
 		});
 		salirBut.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 				ventana15 ventana = new ventana15();
 				ventana.setVisible(true);
-				
+
 			}
 		});
 		platosBut.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
@@ -154,17 +159,22 @@ public class ventana7 extends JFrame {
 				ventana.setVisible(true);
 			}
 		});
+
+		String[] columnas = { "Producto", "Cantidad", "Unidad", "Fecha", "Precio unit.", "Vencimiento", "Subtotal" };
+		DefaultTableModel modeloTabl = new DefaultTableModel(columnas, 0);
+		JTable tabla = new JTable(modeloTabl);
+		JScrollPane scroll = new JScrollPane(tabla);
+		scroll.setBounds(30, 80, 1000, 250);
 		
-		String[] columnas = { "Nº Compra", "Fecha", "Productos", "Total", "Detalle" };
-
-		Object[][] datos = { { "Nº Compra", "Fecha", "Productos", "Total", "Detalle" }, { 1, "01/08/2026", "3 productos", "$2650", "Ver" },
-				{ 2, "03/08/2026", "2 productos", "1480", "Ver" }
-		};
-
-		JTable tabla = new JTable(datos, columnas);
-		tabla.setBounds(30, 140, 1000, 250);
-		tabla.setRowHeight(50);
-
+		ActualizarCBut.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				actCompra(modeloTabl);
+				
+			}
+		});
+		
 		this.add(panelito);
 		panelito7.add(inicioBut);
 		panelito7.add(productosBut);
@@ -176,7 +186,8 @@ public class ventana7 extends JFrame {
 		contenido.add(tituloInicio);
 		contenido.add(RegistrarCBut);
 		contenido.add(volverIBut);
-		contenido.add(tabla);
+		contenido.add(scroll);
+		contenido.add(ActualizarCBut);
 
 		panelito8.add(barraSuperior);
 		panelito8.add(barraSuperior2);
@@ -197,14 +208,29 @@ public class ventana7 extends JFrame {
 
 		g.setColor(Color.BLACK);
 		g.drawRect(0, 0, 1366, 105);
-		
+
 		g.setColor(Color.BLACK);
-		g.drawRect(205, 245, 1000, 150);
+		g.drawRect(205, 186, 1000, 248);
 
 		Graphics2D g2d = (Graphics2D) g;
-		GradientPaint degradado = new GradientPaint(0, 750, new Color(47, 85, 151, 0), 0, 300, new Color(47, 85, 151, 0));
+		GradientPaint degradado = new GradientPaint(0, 750, new Color(47, 85, 151, 0), 0, 300,
+				new Color(47, 85, 151, 0));
 		g2d.setPaint(degradado);
 		g2d.fillRect(0, 0, getWidth(), getHeight());
 
+	}
+
+	public void altaCompra(String p, int c, String u, String f, float pU, String v, float s) {
+		Compra co = new Compra(p, c, u, f, pU, v, s);
+		listaC.add(co);
+	}
+
+	public void actCompra(DefaultTableModel d) {
+		d.setRowCount(0);
+		for (Compra co : listaC) {
+			Object[] fila = { co.getProducto(), co.getCantidad(), co.getUnidad(), co.getFecha(), co.getPrecioUnit(),
+					co.getVencimiento(), co.getSubtotal() };
+			d.addRow(fila);
+		}
 	}
 }
