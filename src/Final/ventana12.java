@@ -162,7 +162,7 @@ public class ventana12 extends JFrame {
 		
 		
 		
-		String[] columnas = { "Código", "Nombre", "Stock", "Unidad", "Sector" };
+		String[] columnas = { "Dia", "Turno", "Estado", "Porciones", "Estado" };
 		DefaultTableModel modeloTabl = new DefaultTableModel(columnas, 0);
 		JTable tabla = new JTable(modeloTabl);
 		JScrollPane scroll = new JScrollPane(tabla);
