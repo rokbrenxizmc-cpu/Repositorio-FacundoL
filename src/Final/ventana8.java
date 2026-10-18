@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 
 public class ventana8 extends JFrame {
 	public ventana8(ventana7 v7) {
+		gestor g = new gestor();
 		String[] Unidad = {"Kilo", "Litro", "Docena"};
 		this.setTitle("Ventana 8");
 		this.setSize(1366, 688);
@@ -138,24 +139,43 @@ public class ventana8 extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String p = Producto.getText();
-				String c = Cantidad.getText();
-				String u = comboUnidad.getSelectedItem().toString();
-				String f = Fecha.getText();
-				String pU = PrecioUnit.getText();
-				String v = Vencimiento.getText();
-				String s = Subtotal.getText();
-				
-				if (Producto.getText().isEmpty() || Cantidad.getText().isEmpty() || Fecha.getText().isEmpty() || PrecioUnit.getText().isEmpty() || Vencimiento.getText().isEmpty() || Subtotal.getText().isEmpty()) {
-					JOptionPane.showMessageDialog(null, "Falta rellenar información...");
-				}else {
-					int cantidad = Integer.parseInt(c);
-					float precioUnit = Integer.parseInt(pU);
-					float subT = Integer.parseInt(s);
-					v7.altaCompra(p, cantidad, u, f, precioUnit, v, subT);
-					dispose();
-					v7.setVisible(true);
-				}
+				String p = ProductoR.getText().trim();
+                String c = Cantidad.getText().trim();
+                String u = comboUnidad.getSelectedItem().toString();
+                String f = Fecha.getText().trim();
+                String pU = PrecioUnit.getText().trim();
+                String v = Vencimiento.getText().trim();
+                String sb = Subtotal.getText().trim();
+
+                if (p.isEmpty() || c.isEmpty() ||u.isEmpty() || f.isEmpty() || pU.isEmpty() || v.isEmpty() || sb.isEmpty()) {
+
+                    JOptionPane.showMessageDialog(null, "Falta rellenar información...");
+
+                } else {
+
+                    try {
+
+                        int cantidad = Integer.parseInt(c);
+                        float precioUnit = Integer.parseInt(pU);
+                        float subTotal = Integer.parseInt(sb);
+
+                        boolean guardado = g.altaCompras(p, cantidad, u, f, precioUnit, v, subTotal);
+
+                        if (guardado) {
+
+                            JOptionPane.showMessageDialog(null, "Producto guardado correctamente");
+
+                            dispose();
+                            v7.setVisible(true);
+
+                        }
+
+                    } catch (NumberFormatException ex) {
+
+                        JOptionPane.showMessageDialog(null, "El código y el stock deben ser números enteros");
+
+                    }
+                }
 				
 			}
 		});

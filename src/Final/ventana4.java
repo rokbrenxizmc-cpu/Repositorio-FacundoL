@@ -1,5 +1,5 @@
 package Final;
-import java.util.ArrayList;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
@@ -8,194 +8,256 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class ventana4 extends JFrame {
-	ArrayList<Producto> listaP = new ArrayList<>(); 
+
+	gestor g = new gestor();
+
 	public ventana4() {
-		this.setTitle("Ventana 4");
-		this.setSize(1366, 688);
-		this.setResizable(false);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setLocationRelativeTo(null);
 
-		JPanel panelito = new JPanel(new BorderLayout());
-		JPanel panelito7 = new JPanel();
-		panelito7.setLayout(null);
-		panelito7.setPreferredSize(new Dimension(168, 0));
-		JPanel contenido = new JPanel();
-		contenido.setLayout(null);
-		JPanel panelito8 = new JPanel();
-		panelito8.setLayout(null);
-		panelito8.setPreferredSize(new Dimension(0, 75));
-		JPanel rectanguloAzul = new JPanel(null);
-		rectanguloAzul.setBackground(new Color(47, 85, 151));
-		rectanguloAzul.setBounds(0, 0, 1500, 1500);
-		JPanel rectanguloAzul2 = new JPanel(null);
-		rectanguloAzul2.setBackground(new Color(80, 112, 167));
-		rectanguloAzul2.setBounds(0, 0, 1700, 1700);
+        this.setTitle("Ventana 4");
+        this.setSize(1366, 688);
+        this.setResizable(false);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setLocationRelativeTo(null);
 
-		JLabel tituloInicio = new JLabel("Productos");
-		tituloInicio.setBounds(30, 25, 300, 35);
-		tituloInicio.setFont(new Font("Arial", Font.BOLD, 24));
+        JPanel panelito = new JPanel(new BorderLayout());
 
-		JLabel barraSuperior = new JLabel("Sistema de Gestión del Comedor");
-		barraSuperior.setFont(new Font("Arial", Font.BOLD, 24));
-		barraSuperior.setBounds(30, 20, 500, 40);
-		barraSuperior.setForeground(Color.WHITE);
-		JLabel barraSuperior2 = new JLabel("UTU Arrayanes");
-		barraSuperior2.setBounds(1215, 20, 250, 40);
-		barraSuperior2.setForeground(Color.WHITE);
-		JButton inicioBut = new JButton("Inicio");
-		inicioBut.setText("<html><u>Inicio</u></html>");
-		inicioBut.setBackground(new Color(130, 152, 189));
-		inicioBut.setFont(new Font("Arial", Font.BOLD, 15));
-		JButton productosBut = new JButton("Productos");
-		productosBut.setText("<html><u>Productos</u></html>");
-		productosBut.setBackground(new Color(130, 152, 189));
-		productosBut.setFont(new Font("Arial", Font.BOLD, 15));
-		JButton comprasBut = new JButton("Compras");
-		comprasBut.setText("<html><u>Compras</u></html>");
-		comprasBut.setBackground(new Color(130, 152, 189));
-		comprasBut.setFont(new Font("Arial", Font.BOLD, 15));
-		JButton platosBut = new JButton("Platos");
-		platosBut.setText("<html><u>Platos</u></html>");
-		platosBut.setBackground(new Color(130, 152, 189));
-		platosBut.setFont(new Font("Arial", Font.BOLD, 15));
-		JButton menusBut = new JButton("Menús");
-		menusBut.setText("<html><u>Menús</u></html>");
-		menusBut.setBackground(new Color(130, 152, 189));
-		menusBut.setFont(new Font("Arial", Font.BOLD, 15));
-		JButton salirBut = new JButton("Salir");
-		salirBut.setText("<html><u>Salir</u></html>");
-		salirBut.setBackground(new Color(130, 152, 189));
-		salirBut.setFont(new Font("Arial", Font.BOLD, 15));
-		JButton AgregarPBut = new JButton("Agregar Producto");
-		AgregarPBut.setText("<html><u>Agregar Producto</u></html>");
-		AgregarPBut.setBackground(new Color(255, 255, 255));
-		AgregarPBut.setFont(new Font("Arial", Font.BOLD, 15));
-		JButton ActualizarP = new JButton("Actualizar lista");
-		ActualizarP.setText("<html><u>Actualizar lista</u></html>");
-		ActualizarP.setBackground(new Color(255, 255, 255));
-		ActualizarP.setFont(new Font("Arial", Font.BOLD, 15));
-		JButton VolverIBut = new JButton("Volver al Inicio");
-		VolverIBut.setText("<html><u>Volver al Inicio</u></html>");
-		VolverIBut.setBackground(new Color(255, 255, 255));
-		VolverIBut.setFont(new Font("Arial", Font.BOLD, 15));
+        JPanel panelito7 = new JPanel();
+        panelito7.setLayout(null);
+        panelito7.setPreferredSize(new Dimension(168, 0));
 
-		inicioBut.setBounds(20, 25, 120, 40);
-		productosBut.setBounds(20, 70, 120, 40);
-		comprasBut.setBounds(20, 115, 120, 40);
-		platosBut.setBounds(20, 160, 120, 40);
-		menusBut.setBounds(20, 205, 120, 40);
-		salirBut.setBounds(20, 250, 120, 40);
-		AgregarPBut.setBounds(50, 360, 200, 55);
-		ActualizarP.setBounds(300, 360, 200, 55);
-		VolverIBut.setBounds(550, 360, 200, 55);
-		
-		
-		
-		 comprasBut.addActionListener(new ActionListener() {
-				
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					dispose();
-					ventana7 ventana = new ventana7();
-					ventana.setVisible(true);
-					
+        JPanel contenido = new JPanel();
+        contenido.setLayout(null);
+
+        JPanel panelito8 = new JPanel();
+        panelito8.setLayout(null);
+        panelito8.setPreferredSize(new Dimension(0, 75));
+
+        JPanel rectanguloAzul = new JPanel(null);
+        rectanguloAzul.setBackground(new Color(47, 85, 151));
+        rectanguloAzul.setBounds(0, 0, 1500, 1500);
+
+        JPanel rectanguloAzul2 = new JPanel(null);
+        rectanguloAzul2.setBackground(new Color(80, 112, 167));
+        rectanguloAzul2.setBounds(0, 0, 1700, 1700);
+
+        JLabel tituloInicio = new JLabel("Productos");
+        tituloInicio.setBounds(30, 25, 300, 35);
+        tituloInicio.setFont(new Font("Arial", Font.BOLD, 24));
+
+        JLabel barraSuperior = new JLabel("Sistema de Gestión del Comedor");
+        barraSuperior.setFont(new Font("Arial", Font.BOLD, 24));
+        barraSuperior.setBounds(30, 20, 500, 40);
+        barraSuperior.setForeground(Color.WHITE);
+
+        JLabel barraSuperior2 = new JLabel("UTU Arrayanes");
+        barraSuperior2.setBounds(1215, 20, 250, 40);
+        barraSuperior2.setForeground(Color.WHITE);
+
+        JButton inicioBut = new JButton("Inicio");
+        inicioBut.setText("<html><u>Inicio</u></html>");
+        inicioBut.setBackground(new Color(130, 152, 189));
+        inicioBut.setFont(new Font("Arial", Font.BOLD, 15));
+
+        JButton productosBut = new JButton("Productos");
+        productosBut.setText("<html><u>Productos</u></html>");
+        productosBut.setBackground(new Color(130, 152, 189));
+        productosBut.setFont(new Font("Arial", Font.BOLD, 15));
+
+        JButton comprasBut = new JButton("Compras");
+        comprasBut.setText("<html><u>Compras</u></html>");
+        comprasBut.setBackground(new Color(130, 152, 189));
+        comprasBut.setFont(new Font("Arial", Font.BOLD, 15));
+
+        JButton platosBut = new JButton("Platos");
+        platosBut.setText("<html><u>Platos</u></html>");
+        platosBut.setBackground(new Color(130, 152, 189));
+        platosBut.setFont(new Font("Arial", Font.BOLD, 15));
+
+        JButton menusBut = new JButton("Menús");
+        menusBut.setText("<html><u>Menús</u></html>");
+        menusBut.setBackground(new Color(130, 152, 189));
+        menusBut.setFont(new Font("Arial", Font.BOLD, 15));
+
+        JButton salirBut = new JButton("Salir");
+        salirBut.setText("<html><u>Salir</u></html>");
+        salirBut.setBackground(new Color(130, 152, 189));
+        salirBut.setFont(new Font("Arial", Font.BOLD, 15));
+
+        JButton AgregarPBut = new JButton("Agregar Producto");
+        AgregarPBut.setText("<html><u>Agregar Producto</u></html>");
+        AgregarPBut.setBackground(Color.WHITE);
+        AgregarPBut.setFont(new Font("Arial", Font.BOLD, 15));
+
+        JButton ActualizarP = new JButton("Actualizar lista");
+        ActualizarP.setText("<html><u>Actualizar</u></html>");
+        ActualizarP.setBackground(Color.WHITE);
+        ActualizarP.setFont(new Font("Arial", Font.BOLD, 15));
+
+        JButton VolverIBut = new JButton("Volver al Inicio");
+        VolverIBut.setText("<html><u>Volver al Inicio</u></html>");
+        VolverIBut.setBackground(Color.WHITE);
+        VolverIBut.setFont(new Font("Arial", Font.BOLD, 15));
+        
+        JButton EliminarPBut = new JButton("Eliminar");
+        EliminarPBut.setText("<html><u>Eliminar</u></html>");
+        EliminarPBut.setBackground(Color.WHITE);
+        EliminarPBut.setFont(new Font("Arial", Font.BOLD, 15));
+
+        inicioBut.setBounds(20, 25, 120, 40);
+        productosBut.setBounds(20, 70, 120, 40);
+        comprasBut.setBounds(20, 115, 120, 40);
+        platosBut.setBounds(20, 160, 120, 40);
+        menusBut.setBounds(20, 205, 120, 40);
+        salirBut.setBounds(20, 250, 120, 40);
+
+        AgregarPBut.setBounds(50, 360, 200, 55);
+        ActualizarP.setBounds(300, 360, 200, 55);
+        VolverIBut.setBounds(800, 360, 200, 55);
+        EliminarPBut.setBounds(550, 360, 200, 55);
+
+        comprasBut.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                ventana7 ventana = new ventana7();
+                ventana.setVisible(true);
+            }
+        });
+
+        platosBut.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                ventana10 ventana = new ventana10();
+                ventana.setVisible(true);
+            }
+        });
+
+        menusBut.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                ventana12 ventana = new ventana12();
+                ventana.setVisible(true);
+            }
+        });
+
+        VolverIBut.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                ventana3 ventana = new ventana3();
+                ventana.setVisible(true);
+            }
+        });
+
+        inicioBut.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                ventana3 ventana = new ventana3();
+                ventana.setVisible(true);
+            }
+        });
+
+        AgregarPBut.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new ventana5(ventana4.this).setVisible(true);
+            }
+        });
+
+        salirBut.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                ventana15 ventana = new ventana15();
+                ventana.setVisible(true);
+            }
+        });
+
+   
+
+        String[] columnas = {"Código", "Nombre", "Stock", "Unidad", "Sector", "pd"};
+
+        DefaultTableModel modeloTabl = new DefaultTableModel(columnas, 0);
+
+        JTable tabla = new JTable(modeloTabl);
+        tabla.removeColumn(tabla.getColumnModel().getColumn(5));
+        tabla.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+        JScrollPane scroll = new JScrollPane(tabla);
+        scroll.setBounds(30, 80, 1000, 250);
+
+  
+
+        ActualizarP.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                g.listarProductos(modeloTabl);
+
+            }
+        });
+        
+        EliminarPBut.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int fila = tabla.getSelectedRow();
+				if (fila != -1) {
+					int filaModelo = tabla.convertRowIndexToModel(fila);
+					int pd = (int)modeloTabl.getValueAt(filaModelo, 5);
+					int respuesta = JOptionPane.showConfirmDialog(null, "¿Está seguro de que desea eliminar este producto?", "Confirmar eliminación",
+							JOptionPane.YES_NO_OPTION);
+					if (respuesta == JOptionPane.YES_OPTION) {
+						boolean eliminado = g.bajaProducto(pd);
+						if (eliminado) {
+							g.listarProductos(modeloTabl);
+						}
+					}
 				}
-			});
-platosBut.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				dispose();
-				ventana10 ventana = new ventana10();
-				ventana.setVisible(true);
-			}
-		});
-		menusBut.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				dispose();
-				ventana12 ventana = new ventana12();
-				ventana.setVisible(true);
-			}
-		});
-		
-		VolverIBut.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				dispose();
-				ventana3 ventana = new ventana3();
-		        ventana.setVisible(true);
-			}
-		});
-		inicioBut.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-			dispose();	
-				ventana3 ventana = new ventana3();
-				ventana.setVisible(true);
-			}
-		});
-		AgregarPBut.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				new ventana5(ventana4.this).setVisible(true);
-				
 				
 			}
 		});
-salirBut.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				dispose();
-				ventana15 ventana = new ventana15();
-				ventana.setVisible(true);
-				
-			}
-		});
-		
-		String[] columnas = { "Código", "Nombre", "Stock", "Unidad", "Sector" };
-		DefaultTableModel modeloTabl = new DefaultTableModel(columnas, 0);
-		JTable tabla = new JTable(modeloTabl);
-		JScrollPane scroll = new JScrollPane(tabla);
-		scroll.setBounds(30, 80, 1000, 250);
-		
-ActualizarP.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				actProductos(modeloTabl);
-				
-			}
-		});
-		
-		this.add(panelito);
-		panelito7.add(inicioBut);
-		panelito7.add(productosBut);
-		panelito7.add(comprasBut);
-		panelito7.add(platosBut);
-		panelito7.add(menusBut);
-		panelito7.add(salirBut);
 
-		contenido.add(tituloInicio);
-		contenido.add(AgregarPBut);
-		contenido.add(VolverIBut);
-		contenido.add(scroll);
-		contenido.add(ActualizarP);
+        this.add(panelito);
 
-		panelito8.add(barraSuperior);
-		panelito8.add(barraSuperior2);
-		panelito8.add(rectanguloAzul);
-		panelito7.add(rectanguloAzul2);
-		panelito.add(panelito7, BorderLayout.WEST);
-		panelito.add(contenido, BorderLayout.CENTER);
-		panelito.add(panelito8, BorderLayout.NORTH);
-	}
+        panelito7.add(inicioBut);
+        panelito7.add(productosBut);
+        panelito7.add(comprasBut);
+        panelito7.add(platosBut);
+        panelito7.add(menusBut);
+        panelito7.add(salirBut);
+
+        contenido.add(tituloInicio);
+        contenido.add(AgregarPBut);
+        contenido.add(VolverIBut);
+        contenido.add(scroll);
+        contenido.add(ActualizarP);
+        contenido.add(EliminarPBut);
+
+        panelito8.add(barraSuperior);
+        panelito8.add(barraSuperior2);
+        panelito8.add(rectanguloAzul);
+        panelito7.add(rectanguloAzul2);
+
+        panelito.add(panelito7, BorderLayout.WEST);
+        panelito.add(contenido, BorderLayout.CENTER);
+        panelito.add(panelito8, BorderLayout.NORTH);
+
+
+        g.listarProductos(modeloTabl);
+
+    }
 
 	@Override
 	public void paint(Graphics g) {
@@ -207,25 +269,16 @@ ActualizarP.addActionListener(new ActionListener() {
 
 		g.setColor(Color.BLACK);
 		g.drawRect(0, 0, 1366, 105);
-		
+
 		g.setColor(Color.BLACK);
 		g.drawRect(205, 185, 1000, 250);
 
 		Graphics2D g2d = (Graphics2D) g;
-		GradientPaint degradado = new GradientPaint(0, 750, new Color(47, 85, 151, 0), 0, 300, new Color(47, 85, 151, 0));
+
+		GradientPaint degradado = new GradientPaint(0, 750, new Color(47, 85, 151, 0), 0, 300,
+				new Color(47, 85, 151, 0));
+
 		g2d.setPaint(degradado);
 		g2d.fillRect(0, 0, getWidth(), getHeight());
-
-	}
-	public void altaProducto(int codigo, String nombre, int stock, String unidad, String sector) {
-		Producto p = new Producto(codigo, nombre, stock, unidad, sector);
-		listaP.add(p);
-	}
-	public void actProductos(DefaultTableModel m) {
-		m.setRowCount(0);
-		for (Producto p:listaP) {
-			Object[] fila = {p.getCodigo(), p.getNombre(), p.getStock(), p.getUnidad(), p.getSector()};
-			m.addRow(fila);
-		}
 	}
 }

@@ -7,11 +7,11 @@ import java.awt.event.ActionListener;
 
 public class ventana11 extends JFrame {
 
-	ventana10 v10;
+	gestor g = new gestor();
 
 	public ventana11(ventana10 v10) {
 
-		this.v10 = v10;
+		
 
 		String[] vegetariano = {"Si", "No"};
 
@@ -201,25 +201,37 @@ public class ventana11 extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				String c = codigo.getText();
-				String n = nombre.getText();
-				String veget = Vegeta.getSelectedItem().toString();
+				String c = codigo.getText().trim();
+                String n = nombre.getText().trim();
+                String v = Vegeta.getSelectedItem().toString();
+                if (c.isEmpty() || n.isEmpty() || v.isEmpty()) {
 
-				if (codigo.getText().isEmpty() ||
-					nombre.getText().isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Falta rellenar información...");
 
-					JOptionPane.showMessageDialog(null, "Falta rellenar información...");
+                } else {
 
-				} else {
+                    try {
 
-					int codigoPlato = Integer.parseInt(c);
+                        int codigo = Integer.parseInt(c);
 
-					v10.altaPlato(codigoPlato, n, veget);
+                        boolean guardado = g.altaPlato(codigo, n, v);
 
-					dispose();
-					v10.setVisible(true);
-				}
-			}
+                        if (guardado) {
+
+                            JOptionPane.showMessageDialog(null, "Producto guardado correctamente");
+
+                            dispose();
+                            v10.setVisible(true);
+
+                        }
+
+                    } catch (NumberFormatException ex) {
+
+                        JOptionPane.showMessageDialog(null, "El código y el stock deben ser números enteros");
+
+                    }
+                }
+            }
 		});
 
 

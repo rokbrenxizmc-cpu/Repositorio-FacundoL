@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 
 public class ventana14 extends JFrame {
 	public ventana14(ventana12 v12) {
+		gestor g = new gestor();
 		String[] Estado = {"Planificado", "Pendiente"};
 		this.setTitle("Ventana 14");
 		this.setSize(1366, 688);
@@ -56,8 +57,10 @@ public class ventana14 extends JFrame {
 		DiaText.setBounds(100, 105, 200, 50);
 		JTextField TurnoText = new JTextField(20);
 		TurnoText.setBounds(100, 175, 200, 50);
-		JTextField PlatoText = new JTextField(20);
-		PlatoText.setBounds(100, 245, 200, 50);
+		DefaultComboBoxModel<String> modeloPlatos = new DefaultComboBoxModel<>();
+		g.listarPlatosParaMenu(modeloPlatos);
+		JComboBox<String> comboPlatos = new JComboBox<>(modeloPlatos);
+		comboPlatos.setBounds(100, 245, 200, 50);
 		JTextField PorcionesText = new JTextField(20);
 		PorcionesText.setBounds(435, 105, 200, 50);
 		JComboBox<String> comboEstados = new JComboBox<>(Estado);
@@ -160,22 +163,39 @@ platosBut.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				/*dispose();
-				ventana12 ventana = new ventana12();
-				ventana.setVisible(true);*/
-				String d = DiaText.getText();
-				String t = TurnoText.getText();
-				String p = PlatoText.getText();
-				String por = PorcionesText.getText();
-				String es = comboEstados.getSelectedItem().toString();
-				if (DiaText.getText().isEmpty() || TurnoText.getText().isEmpty() || PlatoText.getText().isEmpty() || PorcionesText.getText().isEmpty()) {
-					JOptionPane.showMessageDialog(null, "Falta rellenar información...");
-				}else {
-					int porciones = Integer.parseInt(por);
-					v12.altaMenu(d, t, p, porciones, es);
-					dispose();
-					v12.setVisible(true);
-				}
+				String d = DiaText.getText().trim();
+                String t = TurnoText.getText().trim();
+                String p = comboPlatos.getSelectedItem().toString();
+                String po = PorcionesText.getText().trim();
+                String es = comboEstados.getSelectedItem().toString();
+
+                if (d.isEmpty() || t.isEmpty() || p.isEmpty() || po.isEmpty() || es.isEmpty()) {
+
+                    JOptionPane.showMessageDialog(null, "Falta rellenar información...");
+
+                } else {
+
+                    try {
+
+                        int porciones = Integer.parseInt(po);
+
+                        boolean guardado = g.altaMenu(d, t, p, porciones, es);
+
+                        if (guardado) {
+
+                            JOptionPane.showMessageDialog(null, "Producto guardado correctamente");
+
+                            dispose();
+                            v12.setVisible(true);
+
+                        }
+
+                    } catch (NumberFormatException ex) {
+
+                        JOptionPane.showMessageDialog(null, "El código y el stock deben ser números enteros");
+
+                    }
+                }
 
 			}
 		});
@@ -208,7 +228,7 @@ salirBut.addActionListener(new ActionListener() {
 		contenido.add(subTPorciones);
 		contenido.add(DiaText);
 		contenido.add(TurnoText);
-		contenido.add(PlatoText);
+		contenido.add(comboPlatos);
 		contenido.add(PorcionesText);
 		contenido.add(subTEstado);
 		contenido.add(comboEstados);

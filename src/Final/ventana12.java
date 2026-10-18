@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class ventana12 extends JFrame {
-	ArrayList<Menu> listaM = new ArrayList<>(); 
+	gestor g = new gestor();
 	public ventana12() {
 		this.setTitle("Ventana 12");
 		this.setSize(1366, 688);
@@ -80,6 +80,14 @@ public class ventana12 extends JFrame {
 		ActualizarMBut.setText("<html><u>Actualizar</u></html>");
 		ActualizarMBut.setBackground(new Color(255, 255, 255));
 		ActualizarMBut.setFont(new Font("Arial", Font.BOLD, 15));
+		JButton EliminarMBut = new JButton("Eliminar");
+		EliminarMBut.setText("<html><u>Eliminar</u></html>");
+		EliminarMBut.setBackground(new Color(255, 255, 255));
+		EliminarMBut.setFont(new Font("Arial", Font.BOLD, 15));
+		JButton VolverIBut = new JButton("Volver al Inicio");
+        VolverIBut.setText("<html><u>Volver al Inicio</u></html>");
+        VolverIBut.setBackground(Color.WHITE);
+        VolverIBut.setFont(new Font("Arial", Font.BOLD, 15));
 
 		inicioBut.setBounds(20, 25, 120, 40);
 		productosBut.setBounds(20, 70, 120, 40);
@@ -89,6 +97,8 @@ public class ventana12 extends JFrame {
 		salirBut.setBounds(20, 250, 120, 40);
 		AgregarMBut.setBounds(50, 360, 200, 55);
 		ActualizarMBut.setBounds(300, 360, 200, 55);
+		EliminarMBut.setBounds(550, 360, 200, 55);
+		VolverIBut.setBounds(800, 360, 200, 55);
 
 		comprasBut.addActionListener(new ActionListener() {
 
@@ -160,12 +170,24 @@ public class ventana12 extends JFrame {
 			}
 		});
 		
+		VolverIBut.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                ventana3 ventana = new ventana3();
+                ventana.setVisible(true);
+            }
+        });
 		
 		
-		String[] columnas = { "Dia", "Turno", "Estado", "Porciones", "Estado" };
+		
+		String[] columnas = { "Dia", "Turno", "Plato", "Porciones", "Estado", "pd" };
 		DefaultTableModel modeloTabl = new DefaultTableModel(columnas, 0);
 		JTable tabla = new JTable(modeloTabl);
 		JScrollPane scroll = new JScrollPane(tabla);
+		tabla.removeColumn(tabla.getColumnModel().getColumn(5));
+        tabla.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scroll.setBounds(30, 80, 1000, 250);
 		
 		tabla.setRowHeight(50);
@@ -174,10 +196,31 @@ ActualizarMBut.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				actMenu(modeloTabl);
+				g.listarMenu(modeloTabl);
 				
 			}
 		});
+
+	EliminarMBut.addActionListener(new ActionListener() {
+	
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			int fila = tabla.getSelectedRow();
+			if (fila != -1) {
+				int filaModelo = tabla.convertRowIndexToModel(fila);
+				int pd = (int)modeloTabl.getValueAt(filaModelo, 5);
+				int respuesta = JOptionPane.showConfirmDialog(null, "¿Está seguro de que desea eliminar este producto?", "Confirmar eliminación",
+						JOptionPane.YES_NO_OPTION);
+				if (respuesta == JOptionPane.YES_OPTION) {
+					boolean eliminado = g.bajaMenu(pd);
+					if (eliminado) {
+						g.listarMenu(modeloTabl);
+					}
+				}
+			}
+		
+		}
+	});
 
 		this.add(panelito);
 		panelito7.add(inicioBut);
@@ -191,7 +234,8 @@ ActualizarMBut.addActionListener(new ActionListener() {
 		contenido.add(AgregarMBut);
 		contenido.add(scroll);
 		contenido.add(ActualizarMBut);
-		// contenido.add(PrepararMBut);
+		contenido.add(EliminarMBut);
+		contenido.add(VolverIBut);
 
 		panelito8.add(barraSuperior);
 		panelito8.add(barraSuperior2);
@@ -200,6 +244,7 @@ ActualizarMBut.addActionListener(new ActionListener() {
 		panelito.add(panelito7, BorderLayout.WEST);
 		panelito.add(contenido, BorderLayout.CENTER);
 		panelito.add(panelito8, BorderLayout.NORTH);
+		g.listarMenu(modeloTabl);
 	}
 
 	@Override
@@ -222,16 +267,5 @@ ActualizarMBut.addActionListener(new ActionListener() {
 		g2d.setPaint(degradado);
 		g2d.fillRect(0, 0, getWidth(), getHeight());
 
-	}
-	public void altaMenu(String d, String t, String p, int por, String es) {
-		Menu m = new Menu(d, t, p, por, es);
-		listaM.add(m);
-	}
-	public void actMenu(DefaultTableModel d) {
-		d.setRowCount(0);
-		for (Menu m:listaM) {
-			Object[] fila = {m.getDia(), m.getTurno(), m.getPlato(), m.getPorciones(), m.getEstado()};
-			d.addRow(fila);
-		}
 	}
 }

@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class ventana7 extends JFrame {
-	ArrayList<Compra> listaC = new ArrayList<>();
+	gestor g = new gestor();
 
 	public ventana7() {
 		this.setTitle("Ventana 7");
@@ -81,6 +81,10 @@ public class ventana7 extends JFrame {
 		ActualizarCBut.setText("<html><u>Actualizar</u></html>");
 		ActualizarCBut.setBackground(new Color(255, 255, 255));
 		ActualizarCBut.setFont(new Font("Arial", Font.BOLD, 15));
+		JButton EliminarCBut = new JButton("Eliminar");
+		EliminarCBut.setText("<html><u>Eliminar</u></html>");
+		EliminarCBut.setBackground(new Color(255, 255, 255));
+		EliminarCBut.setFont(new Font("Arial", Font.BOLD, 15));
 
 		inicioBut.setBounds(20, 25, 120, 40);
 		productosBut.setBounds(20, 70, 120, 40);
@@ -89,8 +93,9 @@ public class ventana7 extends JFrame {
 		menusBut.setBounds(20, 205, 120, 40);
 		salirBut.setBounds(20, 250, 120, 40);
 		RegistrarCBut.setBounds(50, 360, 200, 55);
-		volverIBut.setBounds(300, 360, 200, 55);
-		ActualizarCBut.setBounds(550, 360, 200, 55);
+		volverIBut.setBounds(800, 360, 200, 55);
+		ActualizarCBut.setBounds(300, 360, 200, 55);
+		EliminarCBut.setBounds(550, 360, 200, 55);
 
 		volverIBut.addActionListener(new ActionListener() {
 
@@ -136,8 +141,9 @@ public class ventana7 extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new ventana8(ventana7.this).setVisible(true);
-				dispose();
+				setVisible(false);
+				ventana8 ventana = new ventana8(ventana7.this);
+				ventana.setVisible(true);
 			}
 		});
 		salirBut.addActionListener(new ActionListener() {
@@ -160,9 +166,11 @@ public class ventana7 extends JFrame {
 			}
 		});
 
-		String[] columnas = { "Producto", "Cantidad", "Unidad", "Fecha", "Precio unit.", "Vencimiento", "Subtotal" };
+		String[] columnas = { "Producto", "Cantidad", "Unidad", "Fecha", "Precio unit.", "Vencimiento", "Subtotal", "pd" };
 		DefaultTableModel modeloTabl = new DefaultTableModel(columnas, 0);
 		JTable tabla = new JTable(modeloTabl);
+		tabla.removeColumn(tabla.getColumnModel().getColumn(7));
+		tabla.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		JScrollPane scroll = new JScrollPane(tabla);
 		scroll.setBounds(30, 80, 1000, 250);
 		
@@ -170,7 +178,28 @@ public class ventana7 extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				actCompra(modeloTabl);
+				g.listarCompras(modeloTabl);
+				
+			}
+		});
+		
+		EliminarCBut.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int fila = tabla.getSelectedRow();
+				if (fila != -1) {
+					int filaModelo = tabla.convertRowIndexToModel(fila);
+					int pd = (int)modeloTabl.getValueAt(filaModelo, 7);
+					int respuesta = JOptionPane.showConfirmDialog(null, "¿Está seguro de que desea eliminar este registro?", "Confirmar eliminación",
+							JOptionPane.YES_NO_OPTION);
+					if (respuesta == JOptionPane.YES_OPTION) {
+						boolean eliminado = g.bajaCompra(pd);
+						if (eliminado) {
+							g.listarCompras(modeloTabl);
+						}
+					}
+				}
 				
 			}
 		});
@@ -188,6 +217,7 @@ public class ventana7 extends JFrame {
 		contenido.add(volverIBut);
 		contenido.add(scroll);
 		contenido.add(ActualizarCBut);
+		contenido.add(EliminarCBut);
 
 		panelito8.add(barraSuperior);
 		panelito8.add(barraSuperior2);
@@ -196,6 +226,7 @@ public class ventana7 extends JFrame {
 		panelito.add(panelito7, BorderLayout.WEST);
 		panelito.add(contenido, BorderLayout.CENTER);
 		panelito.add(panelito8, BorderLayout.NORTH);
+		g.listarCompras(modeloTabl);
 	}
 
 	@Override
@@ -218,19 +249,4 @@ public class ventana7 extends JFrame {
 		g2d.setPaint(degradado);
 		g2d.fillRect(0, 0, getWidth(), getHeight());
 
-	}
-
-	public void altaCompra(String p, int c, String u, String f, float pU, String v, float s) {
-		Compra co = new Compra(p, c, u, f, pU, v, s);
-		listaC.add(co);
-	}
-
-	public void actCompra(DefaultTableModel d) {
-		d.setRowCount(0);
-		for (Compra co : listaC) {
-			Object[] fila = { co.getProducto(), co.getCantidad(), co.getUnidad(), co.getFecha(), co.getPrecioUnit(),
-					co.getVencimiento(), co.getSubtotal() };
-			d.addRow(fila);
-		}
-	}
-}
+	}}

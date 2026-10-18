@@ -1,4 +1,5 @@
 package Final;
+
 import javax.swing.table.DefaultTableModel;
 import javax.swing.*;
 import java.awt.*;
@@ -8,7 +9,7 @@ import java.util.ArrayList;
 
 public class ventana10 extends JFrame {
 
-	ArrayList<Plato> listaPl = new ArrayList<>();
+	gestor g = new gestor();
 
 	public ventana10() {
 		this.setTitle("Ventana 10");
@@ -84,9 +85,19 @@ public class ventana10 extends JFrame {
 		AgregarPlBut.setFont(new Font("Arial", Font.BOLD, 15));
 
 		JButton ActualizarPl = new JButton("Actualizar lista");
-		ActualizarPl.setText("<html><u>Actualizar lista</u></html>");
+		ActualizarPl.setText("<html><u>Actualizar</u></html>");
 		ActualizarPl.setBackground(new Color(255, 255, 255));
 		ActualizarPl.setFont(new Font("Arial", Font.BOLD, 15));
+
+		JButton EliminarPBut = new JButton("Eliminar");
+		EliminarPBut.setText("<html><u>Eliminar</u></html>");
+		EliminarPBut.setBackground(new Color(255, 255, 255));
+		EliminarPBut.setFont(new Font("Arial", Font.BOLD, 15));
+
+		JButton VolverIBut = new JButton("Volver al Inicio");
+		VolverIBut.setText("<html><u>Volver al Inicio</u></html>");
+		VolverIBut.setBackground(Color.WHITE);
+		VolverIBut.setFont(new Font("Arial", Font.BOLD, 15));
 
 		inicioBut.setBounds(20, 25, 120, 40);
 		productosBut.setBounds(20, 70, 120, 40);
@@ -95,7 +106,9 @@ public class ventana10 extends JFrame {
 		menusBut.setBounds(20, 205, 120, 40);
 		salirBut.setBounds(20, 250, 120, 40);
 		AgregarPlBut.setBounds(50, 360, 200, 55);
-		ActualizarPl.setBounds(280, 360, 200, 55);
+		ActualizarPl.setBounds(300, 360, 200, 55);
+		EliminarPBut.setBounds(550, 360, 200, 55);
+		VolverIBut.setBounds(800, 360, 200, 55);
 
 		comprasBut.addActionListener(new ActionListener() {
 
@@ -143,7 +156,7 @@ public class ventana10 extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				dispose();
+				setVisible(false);
 				ventana11 ventana = new ventana11(ventana10.this);
 				ventana.setVisible(true);
 
@@ -161,11 +174,23 @@ public class ventana10 extends JFrame {
 			}
 		});
 
-		String[] columnas = { "Código", "Nombre", "Vegetariano" };
+		VolverIBut.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				ventana3 ventana = new ventana3();
+				ventana.setVisible(true);
+			}
+		});
+
+		String[] columnas = { "Código", "Nombre", "Vegetariano", "pd" };
 
 		DefaultTableModel modeloTabl = new DefaultTableModel(null, columnas);
 
 		JTable tabla = new JTable(modeloTabl);
+		tabla.removeColumn(tabla.getColumnModel().getColumn(3));
+		tabla.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		JScrollPane scroll = new JScrollPane(tabla);
 		scroll.setBounds(30, 80, 1000, 250);
 		tabla.setRowHeight(50);
@@ -174,7 +199,27 @@ public class ventana10 extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				actPlatos(modeloTabl);
+				g.listarPlato(modeloTabl);
+			}
+		});
+
+		EliminarPBut.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int fila = tabla.getSelectedRow();
+				if (fila != -1) {
+					int filaModelo = tabla.convertRowIndexToModel(fila);
+					int pd = (int)modeloTabl.getValueAt(filaModelo, 3);
+					int respuesta = JOptionPane.showConfirmDialog(null,
+							"¿Está seguro de que desea eliminar este producto?", "Confirmar eliminación", JOptionPane.YES_NO_OPTION);
+					if (respuesta == JOptionPane.YES_OPTION) {
+						boolean eliminado = g.bajaPlato(pd);
+						if (eliminado) {
+							g.listarPlato(modeloTabl);
+						}
+					}
+				}
 			}
 		});
 
@@ -191,6 +236,8 @@ public class ventana10 extends JFrame {
 		contenido.add(AgregarPlBut);
 		contenido.add(ActualizarPl);
 		contenido.add(scroll);
+		contenido.add(EliminarPBut);
+		contenido.add(VolverIBut);
 
 		panelito8.add(barraSuperior);
 		panelito8.add(barraSuperior2);
@@ -201,29 +248,7 @@ public class ventana10 extends JFrame {
 		panelito.add(panelito7, BorderLayout.WEST);
 		panelito.add(contenido, BorderLayout.CENTER);
 		panelito.add(panelito8, BorderLayout.NORTH);
-	}
-
-	public void altaPlato(int codigo, String nombre, String vegetariano) {
-
-		Plato p = new Plato(codigo, nombre, vegetariano);
-
-		listaPl.add(p);
-	}
-
-	public void actPlatos(DefaultTableModel m) {
-
-		m.setRowCount(0);
-
-		for (Plato p : listaPl) {
-
-			Object[] fila = {
-				p.getCodigo(),
-				p.getNombre(),
-				p.getVegetariano()
-			};
-
-			m.addRow(fila);
-		}
+		g.listarPlato(modeloTabl);
 	}
 
 	@Override
@@ -241,12 +266,8 @@ public class ventana10 extends JFrame {
 		g.drawRect(205, 186, 1000, 248);
 
 		Graphics2D g2d = (Graphics2D) g;
-		GradientPaint degradado = new GradientPaint(
-			0, 750,
-			new Color(47, 85, 151, 0),
-			0, 300,
-			new Color(47, 85, 151, 0)
-		);
+		GradientPaint degradado = new GradientPaint(0, 750, new Color(47, 85, 151, 0), 0, 300,
+				new Color(47, 85, 151, 0));
 
 		g2d.setPaint(degradado);
 		g2d.fillRect(0, 0, getWidth(), getHeight());
