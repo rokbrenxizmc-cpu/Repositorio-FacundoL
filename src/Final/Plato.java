@@ -1,38 +1,67 @@
 package Final;
 
 public class Plato {
-	int codigo;
-	String nombre;
-	String vegetariano;
 
-	public Plato(int codigo, String nombre, String vegetariano) {
-		super();
-		this.codigo = codigo;
-		this.nombre = nombre;
-		this.vegetariano = vegetariano;
-	}
+    //Atributos de la clase
 
-	public int getCodigo() {
-		return codigo;
-	}
+    int codigo;
 
-	public void setCodigo(int codigo) {
-		this.codigo = codigo;
-	}
+    String nombre;
 
-	public String getNombre() {
-		return nombre;
-	}
+    String vegetariano;
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
 
-	public String getVegetariano() {
-		return vegetariano;
-	}
+    //Constructor
 
-	public void setVegetariano(String vegetariano) {
-		this.vegetariano = vegetariano;
-	}
+    public Plato(int codigo, String nombre, String vegetariano) {
+
+        super();
+
+        this.codigo = codigo;
+
+        this.nombre = nombre;
+
+        this.vegetariano = vegetariano;
+
+    }
+
+
+    //Getters y setters
+
+    public int getCodigo() {
+
+        return codigo;
+
+    }
+
+    public void setCodigo(int codigo) {
+
+        this.codigo = codigo;
+
+    }
+
+    public String getNombre() {
+
+        return nombre;
+
+    }
+
+    public void setNombre(String nombre) {
+
+        this.nombre = nombre;
+
+    }
+
+    public String getVegetariano() {
+
+        return vegetariano;
+
+    }
+
+    public void setVegetariano(String vegetariano) {
+
+        this.vegetariano = vegetariano;
+
+    }
+
 }
